@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2015 at 01:56 AM
+-- Generation Time: Mar 28, 2015 at 03:50 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `scouting`
 --
+CREATE DATABASE IF NOT EXISTS `scouting` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `scouting`;
 
 -- --------------------------------------------------------
 
@@ -33,14 +35,6 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `match_number` int(11) NOT NULL,
   `comments` text
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `scout_data`
---
-
-INSERT INTO `scout_data` (`id`, `team`, `rating`, `match_number`, `comments`) VALUES
-(1, 3506, 10, 1, NULL),
-(2, 1225, 10, 2, 'good stacker');
 
 --
 -- Indexes for dumped tables
