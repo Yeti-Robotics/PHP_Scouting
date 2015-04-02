@@ -38,6 +38,8 @@ body {
 
 .add_button {
 	width: 80%;
+	border-color: #999999;
+	background-color: #CBCBCB;
 }
 
 #stack_row_container {
@@ -53,4 +55,21 @@ body {
 	width: 15px;
 	position: relative;
 	top: 2px;	
+}
+
+fieldset {
+	background-color: #EFFFEF;
+	border-color: #2DBFE0;
+}
+
+#totes_auto, #coopertition_totes {
+	background-color: yellow;
+}
+
+.cans_dropdown {
+	background-color: #50E050;
+}
+
+.totes_dropdown {
+	background-color: #CBCBCB;
 }

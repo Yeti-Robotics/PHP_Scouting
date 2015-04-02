@@ -32,14 +32,14 @@
 					<input type="checkbox" name="robot_moved" onchange="toggleAutonomous(this.checked)"/><br/>
 					<div id="autonmous_container" class="aligned_controls">
 						<label for="totes_auto">How many totes?</label>
-						<select name="totes_auto">
+						<select name="totes_auto" id="totes_auto">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
 						<label for="cans_auto">How many cans?</label>
-						<select name="cans_auto">
+						<select name="cans_auto" class="cans_dropdown">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -54,7 +54,7 @@
 					<label for="coopertition">Was coopertition attempted?</label>
 					<input type="checkbox" name="coopertition"/>
 					<label for="coopertition_totes">How many totes?</label>
-					<select name="coopertition_totes">
+					<select name="coopertition_totes" id="coopertition_totes">
 						<option value="0" selected="selected">0</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -83,7 +83,7 @@
 		<div id="stack_row" class="stack_row">
 			<hr class="stack_row_divider"/>
 			<label for="stacks_totes">Totes:</label>
-			<select name="stacks_totes[]">
+			<select name="stacks_totes[]" class="totes_dropdown">
 				<option value="0" selected="selected">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -93,7 +93,7 @@
 				<option value="6">6</option>
 			</select>
 			<label for="capped_stack">Cap:</label>
-			<select name="capped_stack[]">
+			<select name="capped_stack[]" class="cans_dropdown">
 				<option value="0" selected="selected">No cap</option>
 				<option value="1">Cap w/o litter</option>
 				<option value="2">Cap w/ litter</option>
