@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2015 at 10:40 PM
+-- Generation Time: Apr 11, 2015 at 11:00 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `coopertition_totes` int(11) NOT NULL,
   `score` int(11) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `scout_data`
@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
 
 INSERT INTO `scout_data` (`scout_data_id`, `team`, `match_number`, `comments`, `robot_moved`, `totes_auto`, `cans_auto`, `coopertition`, `coopertition_totes`, `score`, `rating`) VALUES
 (23, 3506, 1, '', 0, 0, 0, 0, 0, 1, 10),
-(24, 3506, 2, '', 0, 0, 0, 0, 0, 1, 5);
+(24, 3506, 2, '', 0, 0, 0, 0, 0, 1, 5),
+(25, 3507, 3, '', 0, 0, 0, 0, 0, 1, 2),
+(26, 3507, 4, '', 0, 0, 0, 0, 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `stacks` (
 --
 
 INSERT INTO `stacks` (`scout_data_id`, `totes`, `cap_state`) VALUES
-(24, 1, 0);
+(24, 1, 0),
+(26, 6, 0);
 
 --
 -- Indexes for dumped tables
@@ -95,7 +98,7 @@ ALTER TABLE `stacks`
 -- AUTO_INCREMENT for table `scout_data`
 --
 ALTER TABLE `scout_data`
-MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- Constraints for dumped tables
 --

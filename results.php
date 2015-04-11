@@ -13,7 +13,19 @@
 	<div class="results_description">Click a row to view detailed data on that team.</div>
 <?php
 include ("connect.php");
-
+$rating_query = "SELECT AVG(rating) AS rating, team
+					FROM scout_data
+					GROUP BY team";
+$result = $db->query($rating_query);
+$ratings = [];
+if ($result) {
+	while ( $row = $result->fetch_assoc () ) {
+		$ratings[$row["team"]] = $row["rating"];
+	}
+} else {
+	$db->close ();
+	die ( "<h2>Rating query failed</h2>" );
+}
 $query = "SELECT Team, TRUNCATE(SUM(avg_height)/SUM(num_stacks),2) AS \"Avg. Stack Height\", TRUNCATE(AVG(num_stacks),2) AS \"Avg. Stacks per Match\", TRUNCATE((AVG(num_stacks) * SUM(avg_height)/SUM(num_stacks)),2) AS \"Avg. Totes per Match\"
                 FROM (SELECT scout_data.*, COUNT(totes) AS num_stacks, IFNULL(AVG(totes),0) AS avg_height
                         FROM stacks
@@ -29,18 +41,20 @@ if ($result) {
 	foreach ($fields as $field) {
 		echo "<th>".$field->name."</th>";
 	}
+	echo "<th>Rating</th>";	
 	echo "</tr>";
 	while ( $row = $result->fetch_assoc () ) {
 		echo "<tr class=\"results_row\" onclick=\"document.location='team.php?team=".$row["Team"]."'\">";
 		foreach ( $row as $key => $value ) {
 			echo "<td>" . $value . "</td>";
 		}
+		echo "<td>".$ratings[$row["Team"]]."</td>";
 		echo "</tr>";
 	}
 	echo "</table>";
 } else {
 	$db->close ();
-	die ( "<h2>query failed</h2>" );
+	die ( "<h2>Query failed</h2>" );
 }
 
 $db->close ();
