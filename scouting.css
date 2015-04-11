@@ -19,6 +19,10 @@ body {
 	clear: right;
 }
 
+.aligned_controls>textarea {
+	width: 100%;
+}
+
 .stack_row, #autonmous_container {
 	display: none;
 	vertical-align: middle;
@@ -83,3 +87,19 @@ fieldset {
 	background-color: #B8D1F3;
 	cursor: pointer;
 }
+
+#range_value {
+	display: inline-block;
+	float: right;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -70,16 +70,37 @@
 				</div>
 			</fieldset>
 			<fieldset>
-				<legend>Match Score</legend>
+				<legend>Misc.</legend>
+				<div class="aligned_controls">
+					<label for="rating">Rating:</label>
+					<select name="rating">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</div>
 				<div class="aligned_controls">
 					<label for="score">Score:</label>
 					<input type="number" name="score" placeholder="Enter the alliance's score" required="required"/>
 				</div>
+				<div class="aligned_controls">
+					<label>Comments:</label><br/>
+					<textarea name="comments" rows="5"></textarea>
+		 		</div>
 			</fieldset>
 			<div class="submit_button_container">
 				<input type="submit" value="Submit" class="submit_button"/>
 			</div>
 		</form>
+		
+		<!-- Stack row template -->
 		<div id="stack_row" class="stack_row">
 			<hr class="stack_row_divider"/>
 			<label for="stacks_totes">Totes:</label>

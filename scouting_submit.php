@@ -3,8 +3,8 @@ include ("connect.php");
 
 $query = "INSERT INTO scout_data (team, match_number,
 		 robot_moved, totes_auto, cans_auto, coopertition,
-		 coopertition_totes, score) 
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		 coopertition_totes, score, comments, rating) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 //  Insert team record
 if($stmt = $db->prepare($query)){
@@ -20,14 +20,20 @@ if($stmt = $db->prepare($query)){
 	} else{
 		$coopertition_number = 0;
 	}
-	$stmt->bind_param("iiiiiiii", $_POST["team_number"],
+	$comment = null;
+	if (isset($_POST["comments"])) {
+		$comment = $_POST["comments"];
+	}
+	$stmt->bind_param("iiiiiiiisi", $_POST["team_number"],
 		$_POST["match_number"],
 		$robot_moved,
 		$_POST["totes_auto"],
 		$_POST["cans_auto"],
 		$coopertition_number,
 		$_POST["coopertition_totes"],
-		$_POST["score"]);
+		$_POST["score"],
+		$comment,
+		$_POST["rating"]);
 	
 	$stmt->execute();
 	$insert_id = $stmt->insert_id;
