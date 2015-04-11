@@ -1,5 +1,4 @@
 <?php
-print_r ( $_REQUEST );
 include ("connect.php");
 
 $query = "INSERT INTO scout_data (team, match_number,
@@ -7,6 +6,7 @@ $query = "INSERT INTO scout_data (team, match_number,
 		 coopertition_totes, score) 
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+//  Insert team record
 if($stmt = $db->prepare($query)){
 	$robot_moved = 0;
 	if(isset($_POST["robot_moved"])){
@@ -20,8 +20,8 @@ if($stmt = $db->prepare($query)){
 	} else{
 		$coopertition_number = 0;
 	}
-	$stmt->bind_param("iiiiiiii", $_POST["match_number"],
-		$_POST["team_number"],
+	$stmt->bind_param("iiiiiiii", $_POST["team_number"],
+		$_POST["match_number"],
 		$robot_moved,
 		$_POST["totes_auto"],
 		$_POST["cans_auto"],
@@ -31,15 +31,14 @@ if($stmt = $db->prepare($query)){
 	
 	$stmt->execute();
 	$insert_id = $stmt->insert_id;
-	echo($insert_id);
 	
-	if (isset($_POST["stacks_totes"])) {
-		foreach ($_POST["stacks_totes"] as $totes) {
-			print_r($totes);
-			$stack_query = "INSERT INTO stacks (scout_data_id, totes)
-					VALUES (?, ?)";
+	//  Insert stack records
+	if (isset($_POST["stacks_totes"]) && isset($_POST["capped_stack"])) {
+		foreach ($_POST["stacks_totes"] as $index => $totes) {
+			$stack_query = "INSERT INTO stacks (scout_data_id, totes, cap_state)
+					VALUES (?, ?, ?)";
 			if ($stack_stmt = $db->prepare($stack_query)) {
-				$stack_stmt->bind_param("ii", $insert_id, $totes);
+				$stack_stmt->bind_param("iii", $insert_id, $totes, $_POST["capped_stack"][$index]);
 				$stack_stmt->execute();
 			}
 		}

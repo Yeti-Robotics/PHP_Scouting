@@ -1,6 +1,7 @@
 body {
-	max-width: 300px;
+	max-width: 500px;
 	margin: auto;
+	padding: 10px;
 }
 
 .aligned_controls>label {
@@ -20,7 +21,7 @@ body {
 
 .stack_row, #autonmous_container {
 	display: none;
-	vertical-align: middle; 
+	vertical-align: middle;
 }
 
 .submit_button {
@@ -46,15 +47,15 @@ body {
 	text-align: center;
 }
 
-.stack_row_divider{
+.stack_row_divider {
 	margin: 4px 4px 4px 4px;
 }
 
-.delete_button{
+.delete_button {
 	color: red;
 	width: 15px;
 	position: relative;
-	top: 2px;	
+	top: 2px;
 }
 
 fieldset {
@@ -72,4 +73,13 @@ fieldset {
 
 .totes_dropdown {
 	background-color: #CBCBCB;
+}
+
+.results_row {
+	height: 48px;
+}
+
+.results_row:hover {
+	background-color: #B8D1F3;
+	cursor: pointer;
 }
