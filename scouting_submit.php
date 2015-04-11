@@ -33,6 +33,17 @@ if($stmt = $db->prepare($query)){
 	$insert_id = $stmt->insert_id;
 	echo($insert_id);
 	
+	if (isset($_POST["stacks_totes"])) {
+		foreach ($_POST["stacks_totes"] as $totes) {
+			print_r($totes);
+			$stack_query = "INSERT INTO stacks (scout_data_id, totes)
+					VALUES (?, ?)";
+			if ($stack_stmt = $db->prepare($stack_query)) {
+				$stack_stmt->bind_param("ii", $insert_id, $totes);
+				$stack_stmt->execute();
+			}
+		}
+	}
 }
 $db->close();
 ?>
