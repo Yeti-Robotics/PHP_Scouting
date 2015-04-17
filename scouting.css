@@ -93,6 +93,14 @@ fieldset {
 	float: right;
 }
 
+.team_comment {
+	border: #4E95F4 1px solid;
+	background-color: #ECECEC;
+}
+
+.team_row {
+	height: 48px;
+}
 
 
 

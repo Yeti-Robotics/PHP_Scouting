@@ -10,6 +10,10 @@
 	<div class="header">
 		<h2 class="page_header">Yeti Scouting Results</h2>
 	</div>
+	<form class="search" action="team.php" method="get">
+		<input type="number" name="team" placeholder="Enter team number" />
+		<button type="submit">Search</button>
+	</form>
 	<div class="results_description">Click a row to view detailed data on that team.</div>
 <?php
 include ("connect.php");

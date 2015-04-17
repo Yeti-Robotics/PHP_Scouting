@@ -1,3 +1,10 @@
+<html>
+<head>
+<title>Yeti Robotics Scouting</title>
+<meta name="viewport" content="width=device-width, intial-scale=1"/>
+<link href="scouting.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="scouting.js"></script>
+</head>
 <?php
 include ("connect.php");
 
@@ -49,7 +56,16 @@ if($stmt = $db->prepare($query)){
 			}
 		}
 	}
+	
+	if ($insert_id > 0) {
+		echo "<h1>Upload successful.</h1>";
+	} else {
+		echo "<h1>Upload failed.</h1>";
+	}
 }
 $db->close();
 ?>
+<a href="/scouting/index.php">Back</a>
+</body>
+</html>
 
