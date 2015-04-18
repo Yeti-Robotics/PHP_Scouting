@@ -65,7 +65,7 @@ if($stmt = $db->prepare($query)){
 }
 $db->close();
 ?>
-<a href="/scouting/index.php">Back</a>
+<h2><a href="/">Back</a></h2>
 </body>
 </html>
 
