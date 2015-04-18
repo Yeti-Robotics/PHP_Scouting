@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2015 at 01:32 AM
+-- Generation Time: Apr 19, 2015 at 12:00 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -37,8 +37,10 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `coopertition` tinyint(1) NOT NULL,
   `coopertition_totes` int(11) NOT NULL,
   `score` int(11) DEFAULT NULL,
-  `rating` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+  `rating` int(11) NOT NULL DEFAULT '1',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `name` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -76,7 +78,7 @@ ALTER TABLE `stacks`
 -- AUTO_INCREMENT for table `scout_data`
 --
 ALTER TABLE `scout_data`
-MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- Constraints for dumped tables
 --

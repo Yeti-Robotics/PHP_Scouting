@@ -22,6 +22,8 @@ function toggleAutonomous(checked) {
 	}
 }
 
+
+
 function deleteStackRow(rowId){
 	var node = document.getElementById(rowId);
 	node.parentNode.removeChild(node);

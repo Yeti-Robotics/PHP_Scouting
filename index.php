@@ -1,10 +1,7 @@
 <html>
-<head>
-<title>Yeti Robotics Scouting!</title>
-<meta name="viewport" content="width=device-width, intial-scale=1"/>
-<link href="scouting.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="scouting.js"></script>
-</head>
+<?php 
+include('header.php');
+?>
 
 <body>
 	<div class="header">
@@ -17,7 +14,7 @@
 			<fieldset>
 				<legend>Info</legend>
 				<div class="aligned_controls">
-					<label for="name">Name:</label>
+					<label for="name">Your Name:</label>
 					<input type="text" name="name" placeholder="Enter your name" required="required"/><br/>
 					<label>Match #:</label> 
 					<input type="number" name="match_number" placeholder="Enter the match number" required="required"/><br/>
@@ -45,6 +42,14 @@
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
+						<label for="cans_origin_step">Grabs how many cans from middle?</label>
+						<select name="cans_origin_step">
+							<option value="0" selected="selected">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							</select>
 					</div>
 				</div>
 			</fieldset>
@@ -60,6 +65,22 @@
 						<option value="2">2</option>
 						<option value="3">3</option>
 					</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Totes</legend>
+				<div class="aligned_controls">
+					<label for="totes_origin_landfill">Totes from landfill?</label>
+					<input type="checkbox" name="totes_origin_landfill"/>
+					<label for="totes_origin_human">Totes from human player?</label>
+					<input type="checkbox" name="totes_origin_human"/>		
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Cans</legend>
+				<div class="aligned_controls">					
+					<label for="cans_origin_step">Grab cans from middle?</label>
+					<input type="checkbox" name="cans_origin_step"/>
 				</div>
 			</fieldset>
 			<fieldset>
@@ -92,7 +113,7 @@
 				</div>
 				<div class="aligned_controls">
 					<label>Comments:</label><br/>
-					<textarea name="comments" rows="5"></textarea>
+					<textarea name="comments" rows="5" required="required"></textarea>
 		 		</div>
 			</fieldset>
 			<div class="submit_button_container">
