@@ -119,9 +119,11 @@
 				<option value="1">Cap w/o litter</option>
 				<option value="2">Cap w/ litter</option>
 			</select>
-			<img id="delete_button" src="red_x.png" class="delete_button"/>
+			<svg id="delete_button" height="15px" width="15px">
+   				<line x1="0" y1="0" x2="15" y2="15" style="stroke:rgb(255,0,0);stroke-width:2"/>
+  				<line x1="15" y1="0" x2="0" y2="15" style="stroke:rgb(255,0,0);stroke-width:2"/>
+			</svg>
 		</div>
-		
 	</div>
 
 

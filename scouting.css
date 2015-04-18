@@ -55,7 +55,7 @@ body {
 	margin: 4px 4px 4px 4px;
 }
 
-.delete_button {
+#delete_button {
 	color: red;
 	width: 15px;
 	position: relative;
