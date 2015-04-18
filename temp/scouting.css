@@ -1,0 +1,105 @@
+body {
+	max-width: 500px;
+	margin: auto;
+	padding: 10px;
+}
+
+.aligned_controls>label {
+	display: inline-block;
+	float: left;
+	clear: left;
+	text-align: right;
+	width: auto;
+	margin: 2px;
+}
+
+.aligned_controls>input, .aligned_controls>select {
+	display: inline-block;
+	float: right;
+	clear: right;
+}
+
+.aligned_controls>textarea {
+	width: 100%;
+}
+
+.stack_row, #autonmous_container {
+	display: none;
+	vertical-align: middle;
+}
+
+.submit_button {
+	height: 35px;
+	width: 100%;
+	margin-top: 5px;
+	margin: 2px;
+	background-color: #2DBFE0;
+	color: white;
+}
+
+.submit_class_container {
+	margin-top: 10px;
+}
+
+.add_button {
+	width: 80%;
+	border-color: #999999;
+	background-color: #CBCBCB;
+}
+
+#stack_row_container {
+	text-align: center;
+}
+
+.stack_row_divider {
+	margin: 4px 4px 4px 4px;
+}
+
+.delete_button {
+	color: red;
+	width: 15px;
+	position: relative;
+	top: 2px;
+}
+
+fieldset {
+	background-color: #EFFFEF;
+	border-color: #2DBFE0;
+}
+
+#totes_auto, #coopertition_totes {
+	background-color: yellow;
+}
+
+.cans_dropdown {
+	background-color: #50E050;
+}
+
+.totes_dropdown {
+	background-color: #CBCBCB;
+}
+
+.results_row {
+	height: 48px;
+}
+
+.results_row:hover {
+	background-color: #B8D1F3;
+	cursor: pointer;
+}
+
+#range_value {
+	display: inline-block;
+	float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
