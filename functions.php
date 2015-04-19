@@ -28,6 +28,19 @@ function getTeamAutoTable($db, $team){
 	}
 }
 
+function getTeamTotesOriginTable($db, $team){
+	$query = "SELECT match_number AS 'Match Number', if(totes_from_landfill, 'yes', 'no') AS 'Totes Landfill?', if(totes_from_human, 'yes', 'no') AS 'Totes Human Player?'
+				FROM `scout_data`
+				WHERE team=?";
+	if($stmt = $db->prepare($query)){
+		$stmt->bind_param("i", $team);
+		$stmt->execute();
+		return $stmt->get_result();
+	} else{
+		return null;
+	}
+}
+
 function timeAgo($timestamp){
 	$difference = time() - $timestamp;
 	$periods = array("second", "minute", "hour", "day", "week", "month", "years", "decade");
