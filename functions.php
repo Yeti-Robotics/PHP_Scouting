@@ -41,5 +41,20 @@ function timeAgo($timestamp){
 	return $text;
 }
 
+function getTeamCoopertition($db, $team){
+	$query = "SELECT match_number AS 'Match Number', coopertition_totes AS 'Co-op Totes'
+				FROM scout_data
+				WHERE team = ?
+				ORDER BY match_number";
+	if($stmt = $db->prepare($query)){
+		$stmt->bind_param("i", $team);
+		$stmt->execute();
+		return $stmt->get_result();
+	} else{
+		return null;
+	}
+}
+
+
 
 ?>
