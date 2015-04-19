@@ -10,8 +10,9 @@ include ("connect.php");
 
 $query = "INSERT INTO scout_data (team, match_number,
 		 robot_moved, totes_auto, cans_auto, coopertition,
-		 coopertition_totes, score, comments, rating, name) 
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		 coopertition_totes, score, comments, rating, name, 
+		cans_from_middle, totes_from_landfill, totes_from_human, cans_auto_origin) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 //  Insert team record
 if($stmt = $db->prepare($query)){
@@ -21,13 +22,32 @@ if($stmt = $db->prepare($query)){
 	} else{
 		$robot_moved = 0;
 	}
+	$cans_from_middle = 0;
+	if(isset($_POST["cans_from_middle"])){
+		$cans_from_middle = 1;
+	} else{
+		$cans_from_middle = 0;
+	}
+	$totes_from_landfill = 0;
+	if(isset($_POST["totes_from_landfill"])){
+		$totes_from_landfill = 1;
+	} else{
+		$totes_from_landfill = 0;
+	}
+	$totes_from_human = 0;
+	if(isset($_POST["totes_from_human"])){
+		$totes_from_human = 1;
+	} else{
+		$totes_from_human = 0;
+	}
 	$coopertition_number = 0;
 	if(isset($_POST["coopertition_number"])){
 		$coopertition_number = 1;
 	} else{
 		$coopertition_number = 0;
 	}
-	$stmt->bind_param("iiiiiiiisis", $_POST["team_number"],
+	$stmt->bind_param("iiiiiiiisisiiii", 
+		$_POST["team_number"],
 		$_POST["match_number"],
 		$robot_moved,
 		$_POST["totes_auto"],
@@ -37,7 +57,11 @@ if($stmt = $db->prepare($query)){
 		$_POST["score"],
 		$_POST["comments"],
 		$_POST["rating"],
-		$_POST["name"]);
+		$_POST["name"],
+		$cans_from_middle,
+		$totes_from_landfill,
+		$totes_from_human,
+		$_POST["cans_auto_origin"]);
 	
 	$stmt->execute();
 	$insert_id = $stmt->insert_id;

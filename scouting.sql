@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2015 at 12:00 AM
+-- Generation Time: Apr 19, 2015 at 07:17 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `scout_data`
 --
 
+DROP TABLE IF EXISTS `scout_data`;
 CREATE TABLE IF NOT EXISTS `scout_data` (
 `scout_data_id` int(11) NOT NULL,
   `team` int(11) NOT NULL,
@@ -39,8 +40,12 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `score` int(11) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT '1',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `name` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+  `name` text NOT NULL,
+  `cans_from_middle` tinyint(1) NOT NULL,
+  `totes_from_landfill` tinyint(1) NOT NULL,
+  `totes_from_human` tinyint(1) NOT NULL,
+  `cans_auto_origin` tinyint(4) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -48,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
 -- Table structure for table `stacks`
 --
 
+DROP TABLE IF EXISTS `stacks`;
 CREATE TABLE IF NOT EXISTS `stacks` (
   `scout_data_id` int(11) NOT NULL,
   `totes` int(11) NOT NULL,
@@ -78,7 +84,7 @@ ALTER TABLE `stacks`
 -- AUTO_INCREMENT for table `scout_data`
 --
 ALTER TABLE `scout_data`
-MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- Constraints for dumped tables
 --

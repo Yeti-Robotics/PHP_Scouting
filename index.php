@@ -27,29 +27,29 @@ include('header.php');
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
-						<label for="cans_auto">How many cans?</label>
+						<label for="cans_auto">How many cans from auto zone?</label>
 						<select name="cans_auto" class="cans_dropdown">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
-						<label for="cans_origin_step">Grabs how many cans from middle?</label>
-						<select name="cans_origin_step">
+						<label for="cans_auto_origin">Grabs how many cans from step?</label>
+						<select name="cans_auto_origin">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
-							</select>
+						</select>
 					</div>
 				</div>
 			</fieldset>
 			<fieldset>
 				<legend>Coopertition</legend>
 				<div class="aligned_controls">
-					<label for="coopertition">Was coopertition attempted?</label>
-					<input type="checkbox" name="coopertition"/>
+<!-- 					<label for="coopertition">Was coopertition attempted?</label> -->
+<!-- 					<input type="checkbox" name="coopertition"/> -->
 					<label for="coopertition_totes">How many totes?</label>
 					<select name="coopertition_totes" id="coopertition_totes">
 						<option value="0" selected="selected">0</option>
@@ -62,17 +62,17 @@ include('header.php');
 			<fieldset>
 				<legend>Totes</legend>
 				<div class="aligned_controls">
-					<label for="totes_origin_landfill">Totes from landfill?</label>
-					<input type="checkbox" name="totes_origin_landfill"/>
-					<label for="totes_origin_human">Totes from human player?</label>
-					<input type="checkbox" name="totes_origin_human"/>		
+					<label for="totes_from_landfill">Totes from landfill?</label>
+					<input type="checkbox" name="totes_from_landfill"/>
+					<label for="totes_from_human">Totes from human player?</label>
+					<input type="checkbox" name="totes_from_human"/>		
 				</div>
 			</fieldset>
 			<fieldset>
 				<legend>Cans</legend>
 				<div class="aligned_controls">					
-					<label for="cans_origin_step">Grab cans from middle?</label>
-					<input type="checkbox" name="cans_origin_step"/>
+					<label for="cans_from_middle">Grab cans from middle?</label>
+					<input type="checkbox" name="cans_from_middle"/>
 				</div>
 			</fieldset>
 			<fieldset>
