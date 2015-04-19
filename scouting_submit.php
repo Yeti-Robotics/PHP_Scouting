@@ -4,8 +4,8 @@ include ("connect.php");
 $query = "INSERT INTO scout_data (team, match_number,
 		 robot_moved, totes_auto, cans_auto, coopertition,
 		 coopertition_totes, score, comments, rating, name, 
-		cans_from_middle, totes_from_landfill, totes_from_human, cans_auto_origin) 
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		cans_from_middle, totes_from_landfill, totes_from_human, cans_auto_origin, in_auto_zone) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 //  Insert team record
 if($stmt = $db->prepare($query)){
@@ -39,7 +39,13 @@ if($stmt = $db->prepare($query)){
 	} else{
 		$coopertition_number = 0;
 	}
-	$stmt->bind_param("iiiiiiiisisiiii", 
+	$in_auto_zone = 0;
+	if (isset($_POST["in_auto_zone"])) {
+		$in_auto_zone = 1;
+	} else {
+		$in_auto_zone = 0;
+	}
+	$stmt->bind_param("iiiiiiiisisiiiii", 
 		$_POST["team_number"],
 		$_POST["match_number"],
 		$robot_moved,
@@ -54,7 +60,8 @@ if($stmt = $db->prepare($query)){
 		$cans_from_middle,
 		$totes_from_landfill,
 		$totes_from_human,
-		$_POST["cans_auto_origin"]);
+		$_POST["cans_auto_origin"],
+		$in_auto_zone);
 	
 	$stmt->execute();
 	$insert_id = $stmt->insert_id;

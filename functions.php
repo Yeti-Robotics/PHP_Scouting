@@ -17,7 +17,8 @@ function getTeamStacksTable($db, $team){
 }
 
 function getTeamAutoTable($db, $team){
-	$query = "SELECT match_number AS 'Match Number', if(robot_moved, 'yes', 'no') AS 'Robot Moved', totes_auto AS 'Number of totes moved', cans_auto AS 'Number of cans moved', if(cans_auto_origin, 'step', 'auto zone') AS 'Where did cans come from?' FROM scout_data
+	$query = "SELECT match_number AS 'Match Number', if(robot_moved, 'yes', 'no') AS 'Robot Moved', totes_auto AS 'Number of totes moved', cans_auto AS 'Number of cans moved', if(cans_auto_origin, 'step', 'auto zone') AS 'Where did cans come from?', if(in_auto_zone, 'yes', 'no') AS 'Finishes in Auto Zone?'
+				FROM scout_data
 				WHERE team=?";
 	if($stmt = $db->prepare($query)){
 		$stmt->bind_param("i", $team);

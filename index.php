@@ -20,14 +20,14 @@ include('header.php');
 					<label for="robot_moved">Did the robot move?</label>
 					<input type="checkbox" name="robot_moved" onchange="toggleAutonomous(this.checked)"/><br/>
 					<div id="autonmous_container" class="aligned_controls">
-						<label for="totes_auto">How many totes into the auto zone?</label>
+						<label for="totes_auto">How many totes in auto zone?</label>
 						<select name="totes_auto" id="totes_auto">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
-						<label for="cans_auto">How many cans into the auto zone?</label>
+						<label for="cans_auto">How many cans in auto zone?</label>
 						<select name="cans_auto" class="cans_dropdown">
 							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
@@ -42,6 +42,8 @@ include('header.php');
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
+						<label for="in_auto_zone">Did it finish in the auto zone?</label>
+						<input type="checkbox" name="in_auto_zone">
 					</div>
 				</div>
 			</fieldset>
