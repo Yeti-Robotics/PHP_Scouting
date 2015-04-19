@@ -8,7 +8,8 @@ $team = "";
 $comments = [];
 $names = [];
 $timestamps = [];
-$query = "SELECT team, comments, UNIX_TIMESTAMP(timestamp) AS timestamp, name 
+$matchNumber = [];
+$query = "SELECT team, comments, UNIX_TIMESTAMP(timestamp) AS timestamp, name, match_number
 			FROM scout_data
 			WHERE team = ?";
 
@@ -25,6 +26,7 @@ if($stmt = $db->prepare($query)){
 				$comments[] = $row["comments"];
 				$timestamps[] = intval($row["timestamp"]);
 				$names[] = $row["name"];
+				$matchNumber[] = $row["match_number"];
 			}
 		}
 	}
@@ -139,7 +141,7 @@ $db->close();
 					echo "<p class='team_comment'>";
 					echo $comment;
 					echo "<br/>";
-					echo "<span class='timestamp'>-- ".$names[$key].", ".timeAgo($timestamps[$key])."</span>";
+					echo "<span class='timestamp'>-- ".$names[$key].", ".timeAgo($timestamps[$key])." for match #".$matchNumber[$key]."</span>";
 					echo "</p>";
 				}
 			}
