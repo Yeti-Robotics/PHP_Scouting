@@ -1,14 +1,6 @@
-<html>
 <?php 
 include('header.php');
 ?>
-
-<body>
-	<div class="header">
-		<h2 class="page_header">Yeti Scouting</h2>
-		<hr />
-	</div>
-
 	<div>
 		<form id="scouting_form" action="scouting_submit.php" method="POST">
 			<fieldset>
@@ -146,13 +138,6 @@ include('header.php');
 			</svg>
 		</div>
 	</div>
-
-
-</body>
-
-
-
-
-
-
-</html>
+<?php 
+	include("footer.php");
+?>

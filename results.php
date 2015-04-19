@@ -1,19 +1,6 @@
-<html>
-<head>
-<title>Yeti Robotics Scouting</title>
-<meta name="viewport" content="width=device-width, intial-scale=1"/>
-<link href="scouting.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="scouting.js"></script>
-</head>
-
-<body>
-	<div class="header">
-		<h2 class="page_header">Yeti Scouting Results</h2>
-	</div>
-	<form class="search" action="team.php" method="get">
-		<input type="number" name="team" placeholder="Enter team number" />
-		<button type="submit">Search</button>
-	</form>
+<?php 
+	include('header.php');
+?>
 	<div class="results_description">Click a row to view detailed data on that team.</div>
 <?php
 include ("connect.php");
@@ -63,7 +50,5 @@ if ($result) {
 
 $db->close ();
 
+include("footer.php");
 ?>
-</body>
-</html>
-

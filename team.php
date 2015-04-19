@@ -1,15 +1,8 @@
-<html>
-<head>
-<title>Yeti Robotics Scouting</title>
-<meta name="viewport" content="width=device-width, intial-scale=1"/>
-<link href="scouting.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="scouting.js"></script>
-</head>
-
-
 <?php
+include("header.php");
 include ("connect.php");
 include("functions.php");
+
 
 $team = "";
 $comments = [];
@@ -37,10 +30,7 @@ if($stmt = $db->prepare($query)){
 	}
 }
 ?>
-<body>
-	<div class="header">
 		<h2 class="page_header">Team <?php echo $team;?></h2>
-	</div>
 <?php
 $result = getTeamStacksTable($db, $team);
 echo "<h3>Teleop</h3>";
@@ -87,5 +77,6 @@ $db->close();
 			}
 		?>
 	</div>
-</body>
-</html>
+<?php 
+	include("footer.php");
+?>
