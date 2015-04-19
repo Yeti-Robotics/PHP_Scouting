@@ -79,14 +79,14 @@ if($stmt = $db->prepare($query)){
 	}
 	
 	if ($insert_id > 0) {
-		echo "<h1>Upload successful.</h1>";
+		header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']);
 	} else {
 		echo "<h1>Upload failed.</h1>";
 	}
 }
 $db->close();
 ?>
-<h2><a href="/">Back</a></h2>
+<h2 class="link" onclick="history.back()">Back</h2>
 </body>
 </html>
 

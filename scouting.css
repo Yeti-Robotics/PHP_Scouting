@@ -102,7 +102,11 @@ fieldset {
 	height: 48px;
 }
 
-
+.link {
+	color: -webkit-link;
+	text-decoration: underline;
+	cursor: pointer;
+}
 
 
 
