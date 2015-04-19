@@ -1,10 +1,3 @@
-<html>
-<head>
-<title>Yeti Robotics Scouting</title>
-<meta name="viewport" content="width=device-width, intial-scale=1"/>
-<link href="scouting.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="scouting.js"></script>
-</head>
 <?php
 include ("connect.php");
 
@@ -87,6 +80,4 @@ if($stmt = $db->prepare($query)){
 $db->close();
 ?>
 <h2 class="link" onclick="history.back()">Back</h2>
-</body>
-</html>
 
