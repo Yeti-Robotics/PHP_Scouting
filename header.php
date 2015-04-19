@@ -8,15 +8,13 @@
 </head>
 <body>
 	<div class="header">
-		<a href="/"><h3 class="page_header">Yeti Scouting</h3></a>
-		<nav>
-			<a href ="/results.php">Results</a>
-			<form class="search" action="team.php" method="get">
-				<input type="number" name="team" placeholder="Enter team number" />
-				<button type="submit">Go</button>
-			</form>
+	<nav>
+		<a href="/" class= "page_header">Yeti Scouting</a> | <a href ="/results.php">Results</a>
+		<form class="search" action="team.php" method="get">
+			<input type="number" name="team" placeholder="Enter team number" />
+			<button type="submit">Go</button>
+		</form>
 
 		</nav>
 		<hr />
-
 	</div>
