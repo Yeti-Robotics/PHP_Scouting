@@ -51,14 +51,56 @@ if ($result) {
 	}
 	echo "</table>";
 } else {
-	$db->close ();
-	die ( "<h2>Query failed</h2>" );
+	echo ( "<h2>Query failed</h2>" );
+}
+
+$result = getTeamAutoTable($db, $team);
+echo "<h3>Autonomous</h3>";
+if ($result) {
+	echo "<table border='1'>";
+	$fields = $result->fetch_fields();
+	echo "<tr>";
+	foreach ($fields as $field) {
+			echo "<th>".$field->name."</th>";
+	}
+	echo "</tr>";
+	while ( $row = $result->fetch_assoc () ) {
+		echo "<tr class=\"team_row\">";
+		foreach ( $row as $key => $value ) {
+			echo "<td>" . $value . "</td>";
+		}
+		echo "</tr>";
+	}
+	echo "</table>";
+} else {
+	echo ( "<h2>Query failed</h2>" );
+}
+
+
+$result = getTeamCoopertition($db, $team);
+echo "<h3>Coopertition</h3>";
+if ($result) {
+	echo "<table border='1'>";
+	$fields = $result->fetch_fields();
+	echo "<tr>";
+	foreach ($fields as $field) {
+		echo "<th>".$field->name."</th>";
+	}
+	echo "</tr>";
+	while ( $row = $result->fetch_assoc () ) {
+		echo "<tr class=\"team_row\">";
+		foreach ( $row as $key => $value ) {
+			echo "<td>" . $value . "</td>";
+		}
+		echo "</tr>";
+	}
+	echo "</table>";
+} else {
+	echo ( "<h2>Query failed</h2>" );
 }
 
 $db->close();
-
 ?>
-
 
 	
 	<div>
