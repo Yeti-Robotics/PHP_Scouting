@@ -72,7 +72,7 @@ if($stmt = $db->prepare($query)){
 	}
 	
 	if ($insert_id > 0) {
-		header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']);
+		header("Location: http://" . $_SERVER['HTTP_HOST']);
 	} else {
 		echo "<h1>Upload failed.</h1>";
 	}
