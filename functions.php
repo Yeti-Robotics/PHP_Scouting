@@ -1,11 +1,11 @@
 <?php
 
 function getTeamStacksTable($db, $team){
-	$query = "SELECT match_number AS 'Match Number', totes AS 'Stack Height', COUNT(totes) AS 'Number of Stacks'
+	$query = "SELECT match_number AS 'Match Number', totes AS 'Stack Height', cap_height AS 'Cap Height', COUNT(totes) AS 'Number of Stacks'
 				FROM stacks
 				LEFT JOIN scout_data ON scout_data.scout_data_id = stacks.scout_data_id
 				WHERE totes > 0 AND team = ?
-			    GROUP BY totes, match_number
+			    GROUP BY totes, cap_height, match_number
 				ORDER BY match_number, totes";
 	if($stmt = $db->prepare($query)){
 		$stmt->bind_param("i", $team);

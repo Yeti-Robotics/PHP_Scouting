@@ -69,10 +69,10 @@ if($stmt = $db->prepare($query)){
 	//  Insert stack records
 	if (isset($_POST["stacks_totes"]) && isset($_POST["capped_stack"])) {
 		foreach ($_POST["stacks_totes"] as $index => $totes) {
-			$stack_query = "INSERT INTO stacks (scout_data_id, totes, cap_state)
-					VALUES (?, ?, ?)";
+			$stack_query = "INSERT INTO stacks (scout_data_id, totes, cap_state, cap_height)
+					VALUES (?, ?, ?, ?)";
 			if ($stack_stmt = $db->prepare($stack_query)) {
-				$stack_stmt->bind_param("iii", $insert_id, $totes, $_POST["capped_stack"][$index]);
+				$stack_stmt->bind_param("iiii", $insert_id, $totes, $_POST["capped_stack"][$index], $_POST["cap_height"][$index]);
 				$stack_stmt->execute();
 			}
 		}
