@@ -34,6 +34,28 @@ if($stmt = $db->prepare($query)){
 ?>
 		<h2 class="page_header">Team <?php echo $team;?></h2>
 <?php
+$result = getTeamRankings($db, $team);
+echo "<h3>Overall Results</h3>";
+if ($result) {
+	echo "<table border='1'>";
+	$fields = $result->fetch_fields();
+	echo "<tr>";
+	foreach ($fields as $field) {
+		echo "<th>".$field->name."</th>";
+	}
+	echo "</tr>";
+	while ( $row = $result->fetch_assoc () ) {
+		echo "<tr class=\"team_row\">";
+		foreach ( $row as $key => $value ) {
+			echo "<td>" . $value . "</td>";
+		}
+		echo "</tr>";
+	}
+	echo "</table>";
+} else {
+	echo ( "<h2>Query failed</h2>" );
+}
+
 $result = getTeamStacksTable($db, $team);
 echo "<h3>Teleop</h3>";
 echo "<h4>Stacks</h4>";
@@ -101,7 +123,6 @@ if ($result) {
 	echo ( "<h2>Query failed</h2>" );
 }
 
-
 $result = getTeamCoopertition($db, $team);
 echo "<h3>Coopertition</h3>";
 if ($result) {
@@ -148,5 +169,6 @@ $db->close();
 		?>
 	</div>
 <?php 
+
 	include("footer.php");
 ?>
