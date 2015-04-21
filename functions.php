@@ -30,7 +30,7 @@ function getTeamAutoTable($db, $team){
 }
 
 function getTeamRankings($db, $team){
-	$query = "SELECT t1.team AS Team, ROUND(t1.avg_height,2) AS 'Avg. Stack Height', ROUND(t2.avg_stacks,2) AS 'Avg. Stacks per Match', ROUND(t1.avg_height * t2.avg_stacks,2) AS 'Avg. Totes per Match', ROUND(rating,2) AS 'Rating'
+	$query = "SELECT ROUND(t1.avg_height,2) AS 'Avg. Stack Height', ROUND(t2.avg_stacks,2) AS 'Avg. Stacks per Match', ROUND(t1.avg_height * t2.avg_stacks,2) AS 'Avg. Totes per Match', ROUND(rating,2) AS 'Rating'
 FROM (SELECT team, AVG(totes) AS avg_height
 FROM stacks
 LEFT JOIN scout_data ON scout_data.scout_data_id=stacks.scout_data_id
