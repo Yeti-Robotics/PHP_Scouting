@@ -30,7 +30,7 @@ function getTeamAutoTable($db, $team){
 }
 
 function getTeamRankings($db, $team){
-	$query = "SELECT t1.team AS Team, ROUND(t1.avg_height,2) AS 'Avg. Stack Height', ROUND(t2.avg_stacks,2) AS 'Avg. Stacks per Match', MAX(totes) AS 'Highest Stack Made', ROUND(rating,2) AS 'Rating'
+	$query = "SELECT t1.team AS Team, ROUND(t1.avg_height,2) AS 'Avg. Stack Height', ROUND(t2.avg_stacks,2) AS 'Avg. Stacks per Match', MAX(t4.totes) AS 'Highest Stack Made', ROUND(rating,2) AS 'Rating'
 FROM (SELECT team, AVG(totes) AS avg_height, totes
 FROM stacks
 LEFT JOIN scout_data ON scout_data.scout_data_id=stacks.scout_data_id
@@ -43,9 +43,16 @@ ORDER BY team DESC) AS t2 ON t1.team = t2.team
 LEFT JOIN (SELECT AVG(rating) AS rating, team
 					FROM scout_data
 					GROUP BY team) AS t3 ON t1.team=t3.team
+                    
+LEFT JOIN (SELECT team, totes
+				FROM stacks
+				LEFT JOIN scout_data ON scout_data.scout_data_id = stacks.scout_data_id
+				WHERE totes > 0 AND team = ?
+			    GROUP BY totes, cap_height, match_number
+				ORDER BY match_number, totes) AS t4 ON t4.team=t1.team
 WHERE t1.team=?";
 	if($stmt = $db->prepare($query)){
-		$stmt->bind_param("i", $team);
+		$stmt->bind_param("ii", $team, $team);
 		$stmt->execute();
 		return $stmt->get_result();
 	} else{
