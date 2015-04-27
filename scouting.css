@@ -2,6 +2,7 @@ body {
 	max-width: 500px;
 	margin: auto;
 	padding: 10px;
+	font-family:calibri, arial, sans-serif;
 }
 
 .aligned_controls>label {
@@ -65,6 +66,8 @@ body {
 fieldset {
 	background-color: #EFFFEF;
 	border-color: #2DBFE0;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px #8888AA;
 }
 
 #totes_auto, #coopertition_totes {
@@ -108,8 +111,9 @@ fieldset {
 	cursor: pointer;
 }
 
-
-
+img {
+	max-width:500px;
+}
 
 
 
