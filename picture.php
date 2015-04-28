@@ -14,6 +14,9 @@
 
 	//Handle writing to file here
 	if(! file_exists("pics/" . $teamNumber . "/1.txt")) {
+		if(!file_exists("pics/")) {
+			mkdir("pics/");
+		}
 		mkdir("pics/" . $teamNumber);
 		writeToFile("pics/" . $teamNumber . "/1.txt", $_POST['image']);
 	}
