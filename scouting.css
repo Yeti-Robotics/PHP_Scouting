@@ -109,7 +109,10 @@ fieldset {
 }
 
 
-
+:invalid {
+	border-color:red;
+	border-radius:5px;
+}
 
 
 
