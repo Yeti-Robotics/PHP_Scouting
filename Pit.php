@@ -5,8 +5,7 @@
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
 	<div id='file-upload'>
 		<fieldset id='imageField'>
-			<img alt="Please Upload a File!" id='displayarea' width='240px' height='20px'>
-			<br>
+			<img alt="Please Upload a File!" id='displayarea' width='140px' height='20px'>
 			<br>
 			<br>
 			<legend>Upload Pictures here</legend>
@@ -16,11 +15,13 @@
 		</fieldset>
 	</form>
 	</div>
-	<form action="pitinfo.php">
+	<form action="pitinfo.php" method="POST">
 		<fieldset id='commentsField'>
 			<legend>Type Your comments here</legend>
+			<input type="text" name='scouter_name' placeholder='Please enter your name'><br/>
+			<br>
 			<input type='hidden' name='teamnumber' id='teamnumber2'>
-			<textarea rows="3" cols="25" name='comments' placeholder='Enter comments about the team here' required></textarea>
+			<textarea rows="3" cols="64" name='comments' placeholder='Enter comments about the team here' required></textarea>
 			<br>
 		</fieldset>
 	</form>

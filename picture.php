@@ -18,7 +18,7 @@
 			mkdir("pics/");
 		}
 		if(!file_exists("pics/".$teamNumber)) {
-		mkdir("pics/" . $teamNumber);
+			mkdir("pics/" . $teamNumber);
 		}
 		writeToFile("pics/" . $teamNumber . "/1.txt", $_POST['image']);
 	}
