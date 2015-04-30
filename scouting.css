@@ -5,6 +5,10 @@ body {
 	font-family:calibri, arial, sans-serif;
 }
 
+.header {
+	position:absolute;
+}
+
 .aligned_controls>label {
 	display: inline-block;
 	float: left;
