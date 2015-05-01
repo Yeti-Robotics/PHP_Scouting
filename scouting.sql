@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2015 at 12:49 AM
+-- Generation Time: May 01, 2015 at 01:57 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -23,10 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pit_scouting`
+--
+
+CREATE TABLE IF NOT EXISTS `pit_scouting` (
+  `team_number` int(11) NOT NULL,
+  `pit_comments` mediumtext NOT NULL,
+  `scouter_name` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scout_data`
 --
 
-DROP TABLE IF EXISTS `scout_data`;
 CREATE TABLE IF NOT EXISTS `scout_data` (
 `scout_data_id` int(11) NOT NULL,
   `team` int(11) NOT NULL,
