@@ -23,8 +23,8 @@
 		writeToFile("pics/" . $teamNumber . "/1.txt", $_POST['image']);
 	}
 	else {
-		for($i = 1; file_exists("/pics/" . $teamNumber . "/" . $i . ".png"); $i++){}
-		writeToFile("pics/" . $teamNumber . "/" . ($i+1) . ".txt", $_POST['image']);
+		for($i = 1; file_exists("pics/" . $teamNumber . "/" . $i . ".txt"); $i++){}
+		writeToFile("pics/" . $teamNumber . "/" . ($i) . ".txt", $_POST['image']);
 	}
 	
 	function writeToFile($fileName, $data) {

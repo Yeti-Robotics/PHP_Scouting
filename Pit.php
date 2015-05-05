@@ -13,8 +13,8 @@
 			<input type="hidden" id='imgcode' name='image'>
 			<br>
 		</fieldset>
-	</form>
 	</div>
+	</form>
 	<form action="pitinfo.php" method="POST">
 		<fieldset id='commentsField'>
 			<legend>Type Your comments here</legend>

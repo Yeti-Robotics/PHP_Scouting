@@ -93,6 +93,17 @@ function getTeamCoopertition($db, $team){
 	}
 }
 
+function makeImageHTML($imgCode) {
+	return "<img src='" . $imgCode . "' alt='php did not work'>";
+}
 
+function makeDir($team, $pic) {
+	return "pics/" . $team . "/" . $pic . ".txt";
+}
+
+function getPic($team, $pic) {
+	$file = file(makeDir($team, $pic));
+	return $file[0];
+}
 
 ?>
