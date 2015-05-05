@@ -15,7 +15,6 @@
 			<input type="number" name="team" placeholder="Enter team number" />
 			<button type="submit">Go</button>
 		</form>
-
 		</nav>
 		<hr />
 	</div>
