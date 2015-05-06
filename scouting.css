@@ -120,18 +120,38 @@ img {
 	max-width:500px;
 }
 
-.left_arrow {
+#left_arrow {
 	float: left;
 	cursor: pointer;
 	color: -webkit-link;
 	text-decoration: underline;
 }
 
-.right_arrow {
+#right_arrow {
 	float: right;
 	cursor: pointer;
 	color: -webkit-link;
 	text-decoration: underline;
 }
+
+.pit_link {
+	float: right;
+	display: inline;
+}
+
+.page_header {
+	display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -10,7 +10,9 @@
 <body>
 	<div class="header">
 	<nav>
-		<a href="/" class= "page_header">Yeti Scouting</a> | <a href ="/results.php">Results</a>
+		<a href="/">Yeti Scouting</a> | 
+		<a href="/results.php">Results</a> | 
+		<a href="/pit.php">Pit Form</a>
 		<form class="search" action="team.php" method="get">
 			<input type="number" name="team" placeholder="Enter team number" />
 			<button type="submit">Go</button>
