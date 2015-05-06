@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2015 at 01:57 AM
+-- Generation Time: May 06, 2015 at 09:02 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -26,12 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `pit_scouting`
 --
 
+DROP TABLE IF EXISTS `pit_scouting`;
 CREATE TABLE IF NOT EXISTS `pit_scouting` (
+`pit_scout_data_id` int(11) NOT NULL,
   `team_number` int(11) NOT NULL,
   `pit_comments` mediumtext NOT NULL,
   `scouter_name` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -39,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `pit_scouting` (
 -- Table structure for table `scout_data`
 --
 
+DROP TABLE IF EXISTS `scout_data`;
 CREATE TABLE IF NOT EXISTS `scout_data` (
 `scout_data_id` int(11) NOT NULL,
   `team` int(11) NOT NULL,
@@ -58,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `totes_from_human` tinyint(1) NOT NULL,
   `cans_auto_origin` tinyint(4) NOT NULL,
   `in_auto_zone` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -79,6 +82,12 @@ CREATE TABLE IF NOT EXISTS `stacks` (
 --
 
 --
+-- Indexes for table `pit_scouting`
+--
+ALTER TABLE `pit_scouting`
+ ADD PRIMARY KEY (`pit_scout_data_id`);
+
+--
 -- Indexes for table `scout_data`
 --
 ALTER TABLE `scout_data`
@@ -95,10 +104,15 @@ ALTER TABLE `stacks`
 --
 
 --
+-- AUTO_INCREMENT for table `pit_scouting`
+--
+ALTER TABLE `pit_scouting`
+MODIFY `pit_scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `scout_data`
 --
 ALTER TABLE `scout_data`
-MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=79;
+MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
 -- Constraints for dumped tables
 --
