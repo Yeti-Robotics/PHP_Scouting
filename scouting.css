@@ -117,7 +117,7 @@ fieldset {
 }
 
 img {
-	max-width:500px;
+	width:500px;
 }
 
 #left_arrow {
@@ -125,6 +125,7 @@ img {
 	cursor: pointer;
 	color: -webkit-link;
 	text-decoration: underline;
+	display: block;
 }
 
 #right_arrow {
@@ -132,6 +133,7 @@ img {
 	cursor: pointer;
 	color: -webkit-link;
 	text-decoration: underline;
+	display: block;
 }
 
 .pit_link {
@@ -143,7 +145,13 @@ img {
 	display: inline;
 }
 
+#rotate_ccw {
+	float: left;
+}
 
+#rotate_cw {
+	float: right;
+}
 
 
 

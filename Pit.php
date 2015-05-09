@@ -1,7 +1,7 @@
 <?php 
 	include ('header.php');
 ?>
-	<form name='picture' action="picture.php" method="POST">
+	<form name='picture' action="picture.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
 	<div id='file-upload'>
 		<fieldset id='imageField'>

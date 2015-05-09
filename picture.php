@@ -11,31 +11,22 @@
 <?php
 
 	$teamNumber = $_POST['teamnumber'];
+	$dir = scandir("pics/".$teamNumber);
+	array_splice($dir, 0, 2);
+	$dirLength = count($dir);
 
 	//Handle writing to file here
-	if(! file_exists("pics/" . $teamNumber . "/1.txt")) {
 		if(!file_exists("pics/")) {
 			mkdir("pics/");
 		}
 		if(!file_exists("pics/".$teamNumber)) {
 			mkdir("pics/" . $teamNumber);
 		}
-		writeToFile("pics/" . $teamNumber . "/1.txt", $_POST['image']);
-	}
-	else {
-		for($i = 1; file_exists("pics/" . $teamNumber . "/" . $i . ".txt"); $i++){}
-		writeToFile("pics/" . $teamNumber . "/" . ($i) . ".txt", $_POST['image']);
-	}
+		move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/$teamNumber/".($dirLength + 1).".".getFileExtension($_FILES['RobotPicture']['name']));
 	
-	function writeToFile($fileName, $data) {
-		if(file_exists($fileName)) {
-			return false;
-		}
-		else {
-			$file = fopen($fileName, 'x');
-			fwrite($file, $data);
-			fclose($file);
-		}
+	function getFileExtension($fileName) {
+		$pathInfo = pathinfo($fileName);
+		return $pathInfo['extension'];
 	}
 	include ('footer.php');
 ?>
