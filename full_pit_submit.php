@@ -2,6 +2,27 @@
 	include('header.php');
 	include('connect.php');
 	
+	//Picture submition
+	$teamNumber = $_POST['teamnumber'];
+	$dir = scandir("pics/".$teamNumber);
+	array_splice($dir, 0, 2);
+	$dirLength = count($dir);
+	
+	//Handle writing to file here
+	if(!file_exists("pics/")) {
+		mkdir("pics/");
+	}
+	if(!file_exists("pics/".$teamNumber)) {
+		mkdir("pics/" . $teamNumber);
+	}
+	move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/$teamNumber/".($dirLength + 1).".".getFileExtension($_FILES['RobotPicture']['name']));
+	
+	function getFileExtension($fileName) {
+		$pathInfo = pathinfo($fileName);
+		return $pathInfo['extension'];
+	}
+	
+	//Comments submition
 	$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name)
 				VALUES (?, ?, ?)";
 	if($stmt = $db->prepare($query)){

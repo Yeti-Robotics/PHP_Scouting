@@ -1,33 +1,33 @@
 <?php 
 	include ('header.php');
 ?>
-	<form name='picture' action="picture.php" method="POST" enctype="multipart/form-data">
+	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
-	<div id='file-upload'>
-		<fieldset id='imageField'>
-			<img alt="Please Upload a File!" id='displayarea' width='140px' height='20px'>
-			<br>
-			<br>
-			<legend>Upload Pictures here</legend>
-			<input type="file" id='robotimage' name="RobotPicture"  required>
-			<input type="hidden" id='imgcode' name='image'>
-			<br>
-		</fieldset>
+	<fieldset id='imageField'>
+		<img alt="Please Upload a File!" id='displayarea' style="width: 140px" height='20px'>
+		<br>
+		<br>
+		<legend>Upload Pictures here</legend>
+		<input type="file" id='robotimage' name="RobotPicture">
+		<input type="hidden" id='imgcode' name='image'>
+		<br>
+	</fieldset>
+	<fieldset id='commentsField'>
+		<legend>Type Your comments here</legend>
+		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name'><br/>
+		<br>
+		<input type='hidden' name='teamnumber' id='teamnumber2'>
+		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
+		<br>
+	</fieldset>
+	<div class="submit_button_container">
+		<input type="submit" value="Submit" class="submit_button"/>
 	</div>
-	</form>
-	<form action="pitinfo.php" method="POST">
-		<fieldset id='commentsField'>
-			<legend>Type Your comments here</legend>
-			<input type="text" name='scouter_name' placeholder='Please enter your name'><br/>
-			<br>
-			<input type='hidden' name='teamnumber' id='teamnumber2'>
-			<textarea rows="3" cols="64" name='comments' placeholder='Enter comments about the team here' required></textarea>
-			<br>
-		</fieldset>
 	</form>
 
 	<script>
-	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButton2, teamEntered, commentsField, imageField;
+	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButton2, 
+		teamEntered, commentsField, imageField, nameField, commentsInput, forms;
 
 	teamEntered = false;
 	submitButton = document.createElement('input');
@@ -43,27 +43,44 @@
 	fileInput = document.getElementById('robotimage');
 	commentsField = document.getElementById('commentsField');
 	imageField = document.getElementById('imageField');
+	nameField = document.getElementById('scouter_name');
+	commentsInput = document.getElementById('comments');
+	forms = document.getElementsByTagName('form');
 	
-	teamNumber.onchange = function() {
+	teamNumber.oninput = function() {
 		teamNumber2.value = teamNumber.value;
 		if(teamEntered == false) {
-			imageField.appendChild(submitButton);
-			commentsField.appendChild(submitButton2);
 			teamEntered = true;
 		}
-	}
+	};
 	
+	commentsInput.oninput = function() {
+		if (commentsInput.value !== "") {
+			nameField.setAttribute("required", "required");
+		} else {
+			nameField.removeAttribute("required");
+		}
+	};
 	
-	fileInput.addEventListener('change', function(e) {
+	fileInput.onchange = function(e) {
 		reader.onload = function() {
 			rawData = reader.result;
 			display.src = rawData;
-			display.style.height = 'auto';
+			display.setAttribute("height", "auto");
 			imageCode.value = rawData;
 		}
 		reader.readAsDataURL(e.target.files[0]);
-	});
+	};
 
+	for (var i = 0; i < forms.length; i++) {
+	    forms[i].noValidate = true;
+	    forms[i].addEventListener('submit', function(event) {
+	        if (!event.target.checkValidity()) {
+	            event.preventDefault();
+	            alert("Looks like some fields have some invalid data. Why would that be?");
+	        }
+	    }, false);
+	}
 	
 	</script>
 <?php 
