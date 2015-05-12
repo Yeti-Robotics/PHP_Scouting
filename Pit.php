@@ -9,14 +9,12 @@
 		<br>
 		<legend>Upload Pictures here</legend>
 		<input type="file" id='robotimage' name="RobotPicture">
-		<input type="hidden" id='imgcode' name='image'>
 		<br>
 	</fieldset>
 	<fieldset id='commentsField'>
 		<legend>Type Your comments here</legend>
 		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name'><br/>
 		<br>
-		<input type='hidden' name='teamnumber' id='teamnumber2'>
 		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
 		<br>
 	</fieldset>
@@ -32,8 +30,6 @@
 	teamEntered = false;
 	submitButton = document.createElement('input');
 	submitButton.type = 'submit';
-	submitButton2 = document.createElement('input');
-	submitButton2.type = 'submit';
 
 	reader = new FileReader();
 	display = document.getElementById('displayarea');
@@ -48,14 +44,13 @@
 	forms = document.getElementsByTagName('form');
 	
 	teamNumber.oninput = function() {
-		teamNumber2.value = teamNumber.value;
 		if(teamEntered == false) {
 			teamEntered = true;
 		}
 	};
 	
 	commentsInput.oninput = function() {
-		if (commentsInput.value !== "") {
+		if (commentsInput.value != "") {
 			nameField.setAttribute("required", "required");
 		} else {
 			nameField.removeAttribute("required");
@@ -67,7 +62,6 @@
 			rawData = reader.result;
 			display.src = rawData;
 			display.setAttribute("height", "auto");
-			imageCode.value = rawData;
 		}
 		reader.readAsDataURL(e.target.files[0]);
 	};
