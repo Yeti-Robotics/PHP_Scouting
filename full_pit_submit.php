@@ -5,12 +5,6 @@
 	//Picture submition
 	$teamNumber = $_POST['teamnumber'];
 	
-	if(empty($_POST["scouter_name"])) {
-		die("<h1>You must put your name!</h1>
-			<br>
-			<a href='/Pit.php'>Back</a>");
-	}
-	
 	if(!empty($_FILES["RobotPicture"])) {
 	if(!file_exists("pics/")) {
 		mkdir("pics/");
@@ -31,6 +25,12 @@
 	}
 	
 	if(!empty($_POST["comments"])) {
+	
+	if(empty($_POST["scouter_name"])) {
+		die("<h1>You must put your name!</h1>
+			<br>
+			<a href='/Pit.php'>Back</a>");
+	}
 	//Comments submition
 	$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name)
 				VALUES (?, ?, ?)";
