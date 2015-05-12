@@ -73,7 +73,17 @@
 		picture.setAttribute("src", pics[0]);
 		refreshPicNum();
 		setPictureWidth();
-	} else {
+	}
+	else if(picLimit == 1) {
+		picture.setAttribute("src", pics[0]);
+		refreshPicNum();
+		setPictureWidth();
+		
+		document.getElementById("left_arrow").innerHTML = "";
+		document.getElementById("right_arrow").innerHTML = "";
+		document.getElementById("img_div").innerHTML += "<br><center><h3>No more pictures are available for this team</h3></center>";
+	}
+	else {
 		document.getElementById("left_arrow").innerHTML = "";
 		document.getElementById("right_arrow").innerHTML = "";
 		document.getElementById("img_div").innerHTML = "<center><h3>No pictures are available for this team</h3></center>";
