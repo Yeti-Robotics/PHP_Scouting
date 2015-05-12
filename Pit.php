@@ -3,7 +3,7 @@
 ?>
 	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
-	<fieldset id='imageField'>
+	<fieldset>
 		<img alt="Please Upload a File!" id='displayarea' style="width: 140px" height='20px'>
 		<br>
 		<br>
@@ -11,7 +11,7 @@
 		<input type="file" id='robotimage' name="RobotPicture">
 		<br>
 	</fieldset>
-	<fieldset id='commentsField'>
+	<fieldset>
 		<legend>Type Your comments here</legend>
 		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name'><br/>
 		<br>
@@ -19,41 +19,35 @@
 		<br>
 	</fieldset>
 	<div class="submit_button_container">
-		<input type="submit" value="Submit" class="submit_button"/>
+		<input id="pit_submit" type="submit" value="Submit" class="submit_button"/>
 	</div>
 	</form>
 
 	<script>
-	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButton2, 
-		teamEntered, commentsField, imageField, nameField, commentsInput, forms;
+	var reader = new FileReader();
+	var display = document.getElementById('displayarea');
+	var teamNumber = document.getElementById('teamnumber');
+	var fileInput = document.getElementById('robotimage');
+	var nameField = document.getElementById('scouter_name');
+	var commentsInput = document.getElementById('comments');
+	var inputs = document.getElementsByTagName("input");
+	var filledFields = 0;
+	var submitButton = document.getElementById("pit_submit");
+	var commentText = document.getElementsByTagName("textarea")[0];
 
-	teamEntered = false;
-	submitButton = document.createElement('input');
-	submitButton.type = 'submit';
-
-	reader = new FileReader();
-	display = document.getElementById('displayarea');
-	imageCode = document.getElementById('imgcode');
-	teamNumber = document.getElementById('teamnumber');
-	teamNumber2 = document.getElementById('teamnumber2');
-	fileInput = document.getElementById('robotimage');
-	commentsField = document.getElementById('commentsField');
-	imageField = document.getElementById('imageField');
-	nameField = document.getElementById('scouter_name');
-	commentsInput = document.getElementById('comments');
-	forms = document.getElementsByTagName('form');
-	
-	teamNumber.oninput = function() {
-		if(teamEntered == false) {
-			teamEntered = true;
-		}
-	};
-	
 	commentsInput.oninput = function() {
 		if (commentsInput.value != "") {
 			nameField.setAttribute("required", "required");
 		} else {
 			nameField.removeAttribute("required");
+		}
+	};
+	
+	nameField.oninput = function() {
+		if (nameField.value != "") {
+			commentsInput.setAttribute("required", "required");
+		} else {
+			commentsInput.removeAttribute("required");
 		}
 	};
 	
@@ -66,6 +60,7 @@
 		reader.readAsDataURL(e.target.files[0]);
 	};
 
+	var forms = document.getElementsByTagName('form');
 	for (var i = 0; i < forms.length; i++) {
 	    forms[i].noValidate = true;
 	    forms[i].addEventListener('submit', function(event) {
@@ -74,6 +69,13 @@
 	            alert("Looks like some fields have some invalid data. Why would that be?");
 	        }
 	    }, false);
+	}
+
+	submitButton.onclick = function(event) {
+		if (inputs[1].value != "" && inputs[2].value == "" && inputs[3].value == "" && commentText.value == "") {
+			event.preventDefault();
+			alert('What are you doing? Trying to only submit a team number. What good does that do?');
+		}
 	}
 	
 	</script>
