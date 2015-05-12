@@ -4,24 +4,33 @@
 	
 	//Picture submition
 	$teamNumber = $_POST['teamnumber'];
-	$dir = scandir("pics/".$teamNumber);
-	array_splice($dir, 0, 2);
-	$dirLength = count($dir);
 	
-	//Handle writing to file here
+	if(empty($_POST["scouter_name"])) {
+		die("<h1>You must put your name!</h1>
+			<br>
+			<a href='/Pit.php'>Back</a>");
+	}
+	
+	if(!empty($_FILES["RobotPicture"])) {
 	if(!file_exists("pics/")) {
 		mkdir("pics/");
 	}
 	if(!file_exists("pics/".$teamNumber)) {
 		mkdir("pics/" . $teamNumber);
 	}
-	move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/$teamNumber/".($dirLength + 1).".".getFileExtension($_FILES['RobotPicture']['name']));
 	
 	function getFileExtension($fileName) {
 		$pathInfo = pathinfo($fileName);
 		return $pathInfo['extension'];
 	}
 	
+	$dir = scandir("pics/".$teamNumber);
+	array_splice($dir, 0, 2);
+	$dirLength = count($dir);
+	move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']));
+	}
+	
+	if(!empty($_POST["comments"])) {
 	//Comments submition
 	$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name)
 				VALUES (?, ?, ?)";
@@ -38,6 +47,8 @@
 		}
 	}
 	$db->close();
+	}
+	
 	echo "<h2 class='link' onclick'history.back()'>Back</h2>";
 	include('footer.php');	
 ?>
