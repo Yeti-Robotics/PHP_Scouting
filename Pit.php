@@ -18,33 +18,37 @@
 		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
 		<br>
 	</fieldset>
-	<div class="submit_button_container">
-		<input type="submit" value="Submit" class="submit_button"/>
+	<div id="submit_button_container">
 	</div>
 	</form>
 
 	<script>
-	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButton2, 
+	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButtonContainer, 
 		teamEntered, commentsField, imageField, nameField, commentsInput, forms;
 
 	teamEntered = false;
 	submitButton = document.createElement('input');
 	submitButton.type = 'submit';
+	submitButton.classList.add('submit_button');
 
 	reader = new FileReader();
+	reader.onload = function() {
+		rawData = reader.result;
+		display.src = rawData;
+		display.setAttribute("height", "auto");
+	}
+	
 	display = document.getElementById('displayarea');
-	imageCode = document.getElementById('imgcode');
 	teamNumber = document.getElementById('teamnumber');
-	teamNumber2 = document.getElementById('teamnumber2');
 	fileInput = document.getElementById('robotimage');
-	commentsField = document.getElementById('commentsField');
-	imageField = document.getElementById('imageField');
 	nameField = document.getElementById('scouter_name');
 	commentsInput = document.getElementById('comments');
-	forms = document.getElementsByTagName('form');
+	form = document.getElementsByTagName('form')[0];
+	submitButtonContainer = document.getElementById('submit_button_container');
 	
 	teamNumber.oninput = function() {
 		if(teamEntered == false) {
+			submitButtonContainer.appendChild(submitButton);
 			teamEntered = true;
 		}
 	};
@@ -58,24 +62,17 @@
 	};
 	
 	fileInput.onchange = function(e) {
-		reader.onload = function() {
-			rawData = reader.result;
-			display.src = rawData;
-			display.setAttribute("height", "auto");
-		}
 		reader.readAsDataURL(e.target.files[0]);
 	};
 
-	for (var i = 0; i < forms.length; i++) {
-	    forms[i].noValidate = true;
-	    forms[i].addEventListener('submit', function(event) {
-	        if (!event.target.checkValidity()) {
-	            event.preventDefault();
-	            alert("Looks like some fields have some invalid data. Why would that be?");
-	        }
-	    }, false);
-	}
-	
+    form.noValidate = true;
+    form.addEventListener('submit', function(event) {
+        if (!event.target.checkValidity()) {
+            event.preventDefault();
+            alert("Looks like some fields have some invalid data. Why would that be?");
+        }
+    }, false);
+
 	</script>
 <?php 
 	include('footer.php');
