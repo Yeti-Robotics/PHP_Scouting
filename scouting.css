@@ -117,7 +117,7 @@ fieldset {
 }
 
 img {
-	width:500px;
+	max-width: 500px;
 }
 
 #left_arrow {
@@ -144,16 +144,6 @@ img {
 .page_header {
 	display: inline;
 }
-
-#rotate_ccw {
-	float: left;
-}
-
-#rotate_cw {
-	float: right;
-}
-
-
 
 
 

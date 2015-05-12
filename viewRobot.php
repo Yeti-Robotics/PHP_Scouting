@@ -29,14 +29,8 @@
 	Next Picture →
 </span>
 <div id='img_div'>
-	<img id='picture' src='' alt='What? Where's the picture?!?'>
+	<img id='picture' src='' alt="What? Where's the picture?!?">
 </div>
-<span id='rotate_ccw' onclick='rotateCCW()' class='link' style=''>
-	Rotate 90° CCW
-</span>
-<span id='rotate_cw' onclick='rotateCW()' class='link' style=''>
-	Rotate 90° CW
-</span>
 <hr/>
 <div>
 	<h3>Comments:</h3>
@@ -65,17 +59,20 @@
 	for (var i = 0; i < pics.length; i++) {
 		pics[i] = "pics/" + teamNumber + "/" + pics[i];
 	}
-	console.log(typeof pics[0]);
 	var picLimit = pics.length;
 	var picture;
 	var angle = 0;
 	var ogOrientation = true;
+	var leftPadding = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('padding-left'));
+	var rightPadding = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('padding-right'));
+	var paddingWidth = leftPadding + rightPadding;
+	var width = document.width - paddingWidth;
 
 	picture = document.getElementById("picture");
 	if (picLimit > 1) {
 		picture.setAttribute("src", pics[0]);
-		console.log("loaded");
 		refreshPicNum();
+		setPictureWidth();
 	} else {
 		document.getElementById("left_arrow").innerHTML = "";
 		document.getElementById("right_arrow").innerHTML = "";
@@ -88,7 +85,6 @@
 		} else {
 			picNum = picLimit;
 		}
-		resetPicture();
 		picture.setAttribute("src", pics[picNum - 1]);
 		refreshPicNum();
 	}
@@ -99,7 +95,6 @@
 		} else {
 			picNum = 1;
 		}
-		resetPicture();
 		picture.setAttribute("src", pics[picNum - 1]);
 		refreshPicNum();
 	};
@@ -108,35 +103,9 @@
 		document.getElementById("pic_num").innerHTML = picNum + "/" + picLimit;
 	}
 
-	function setRotationValue(degree) {
-		if (ogOrientation == true) {
-			picture.removeAttribute("width");
-			picture.setAttribute("height", "500px");
-		} else {
-			picture.removeAttribute("height");
-			picture.setAttribute("width", "500px");
-		}
-		angle += degree;
-		picture.style.WebkitTransform = "rotate(" + angle + "deg)";
-		picture.style.msTransform = "rotate(" + angle + "deg)";
-		picture.style.transform = "rotate(" + angle + "deg)";
-		ogOrientation = !ogOrientation;
-	}
-
-	function rotateCCW() {
-		setRotationValue(-90);
-	}
-	
-	function rotateCW() {
-		setRotationValue(90);
-	}
-
-	function resetPicture() {
-		picture.removeAttribute("width");
+	function setPictureWidth() {
+		picture.setAttribute("width", width);
 		picture.removeAttribute("height");
-		picture.style.WebkitTransform = "rotate(0deg)";
-		picture.style.msTransform = "rotate(0deg)";
-		picture.style.transform = "rotate(0deg)";
 	}
 </script>
 </body>
