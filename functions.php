@@ -121,4 +121,29 @@ function getPitComments($db, $team) {
 	}
 }
 
+function resizeImage($src, $dst) {
+
+	header ( 'Content-Type: image/jpeg' );
+
+	list ( $width, $height ) = getimagesize ( $src );
+
+	$newwidth = $width;
+	$newheight = $height;
+
+	if ($width > 640 || $height > 640) {
+		$ratio = 640 / max ( [
+				$width,
+				$height
+		] );
+		$newwidth = $width * $ratio;
+		$newheight = $height * $ratio;
+	}
+
+	$newImg = imagecreatetruecolor ( $newwidth, $newheight );
+	$source = imagecreatefromjpeg( $src );
+
+	imagecopyresized ( $newImg, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height );
+
+	imagejpeg ( $newImg, $dst );
+}
 ?>

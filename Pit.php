@@ -4,7 +4,7 @@
 	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
 	<fieldset>
-		<img alt="Please Upload a File!" id='displayarea' style="width: 140px" height='20px'>
+		<img alt="Please Upload a File!" id='displayarea'>
 		<br>
 		<br>
 		<legend>Upload Pictures here</legend>

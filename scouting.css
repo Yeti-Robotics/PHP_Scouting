@@ -117,7 +117,7 @@ fieldset {
 }
 
 img {
-	max-width: 500px;
+	max-width:100%;
 }
 
 #left_arrow {
