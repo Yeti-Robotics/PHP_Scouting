@@ -1,6 +1,7 @@
 <?php 
 	include('header.php');
 	include('connect.php');
+	include('functions.php');
 	
 	//Picture submition
 	$teamNumber = $_POST['teamnumber'];
@@ -15,7 +16,7 @@
 		$dir = scandir("pics/".$teamNumber);
 		array_splice($dir, 0, 2);
 		$dirLength = count($dir);
-		move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']));
+		resizeImage($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']));
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . "/pit.php");
 	}
 	
