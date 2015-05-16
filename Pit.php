@@ -25,6 +25,12 @@
 
 	<script>
 	var reader = new FileReader();
+	reader.onload = function() {
+		rawData = reader.result;
+		display.src = rawData;
+		display.setAttribute("height", "auto");
+	}
+	
 	var display = document.getElementById('displayarea');
 	var teamNumber = document.getElementById('teamnumber');
 	var fileInput = document.getElementById('robotimage');
@@ -52,11 +58,6 @@
 	};
 	
 	fileInput.onchange = function(e) {
-		reader.onload = function() {
-			rawData = reader.result;
-			display.src = rawData;
-			display.setAttribute("height", "auto");
-		}
 		reader.readAsDataURL(e.target.files[0]);
 	};
 
