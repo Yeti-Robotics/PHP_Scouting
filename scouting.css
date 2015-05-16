@@ -117,8 +117,37 @@ fieldset {
 }
 
 img {
-	max-width:500px;
+	max-width:100%;
 }
+
+#left_arrow {
+	float: left;
+	cursor: pointer;
+	color: -webkit-link;
+	text-decoration: underline;
+	display: block;
+}
+
+#right_arrow {
+	float: right;
+	cursor: pointer;
+	color: -webkit-link;
+	text-decoration: underline;
+	display: block;
+}
+
+.pit_link {
+	float: right;
+	display: inline;
+}
+
+.page_header {
+	display: inline;
+}
+
+
+
+
 
 
 

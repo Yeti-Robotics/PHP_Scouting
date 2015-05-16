@@ -1,69 +1,83 @@
 <?php 
 	include ('header.php');
 ?>
-	<form name='picture' action="picture.php" method="POST">
+	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
-	<div id='file-upload'>
-		<fieldset id='imageField'>
-			<img alt="Please Upload a File!" id='displayarea' width='140px' height='20px'>
-			<br>
-			<br>
-			<legend>Upload Pictures here</legend>
-			<input type="file" id='robotimage' name="RobotPicture"  required>
-			<input type="hidden" id='imgcode' name='image'>
-			<br>
-		</fieldset>
+	<fieldset>
+		<img alt="Please Upload a File!" id='displayarea'>
+		<br>
+		<br>
+		<legend>Upload Pictures here</legend>
+		<input type="file" id='robotimage' name="RobotPicture">
+		<br>
+	</fieldset>
+	<fieldset>
+		<legend>Type Your comments here</legend>
+		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name'><br/>
+		<br>
+		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
+		<br>
+	</fieldset>
+	<div class="submit_button_container">
+		<input id="pit_submit" type="submit" value="Submit" class="submit_button"/>
 	</div>
-	</form>
-	<form action="pitinfo.php" method="POST">
-		<fieldset id='commentsField'>
-			<legend>Type Your comments here</legend>
-			<input type="text" name='scouter_name' placeholder='Please enter your name'><br/>
-			<br>
-			<input type='hidden' name='teamnumber' id='teamnumber2'>
-			<textarea rows="3" cols="64" name='comments' placeholder='Enter comments about the team here' required></textarea>
-			<br>
-		</fieldset>
 	</form>
 
 	<script>
-	var reader, display, imageCode, input, teamNumber, teamNumber2, submitButton, submitButton2, teamEntered, commentsField, imageField;
-
-	teamEntered = false;
-	submitButton = document.createElement('input');
-	submitButton.type = 'submit';
-	submitButton2 = document.createElement('input');
-	submitButton2.type = 'submit';
-
-	reader = new FileReader();
-	display = document.getElementById('displayarea');
-	imageCode = document.getElementById('imgcode');
-	teamNumber = document.getElementById('teamnumber');
-	teamNumber2 = document.getElementById('teamnumber2');
-	fileInput = document.getElementById('robotimage');
-	commentsField = document.getElementById('commentsField');
-	imageField = document.getElementById('imageField');
-	
-	teamNumber.onchange = function() {
-		teamNumber2.value = teamNumber.value;
-		if(teamEntered == false) {
-			imageField.appendChild(submitButton);
-			commentsField.appendChild(submitButton2);
-			teamEntered = true;
-		}
+	var reader = new FileReader();
+	reader.onload = function() {
+		rawData = reader.result;
+		display.src = rawData;
+		display.setAttribute("height", "auto");
 	}
 	
-	
-	fileInput.addEventListener('change', function(e) {
-		reader.onload = function() {
-			rawData = reader.result;
-			display.src = rawData;
-			display.style.height = 'auto';
-			imageCode.value = rawData;
-		}
-		reader.readAsDataURL(e.target.files[0]);
-	});
+	var display = document.getElementById('displayarea');
+	var teamNumber = document.getElementById('teamnumber');
+	var fileInput = document.getElementById('robotimage');
+	var nameField = document.getElementById('scouter_name');
+	var commentsInput = document.getElementById('comments');
+	var inputs = document.getElementsByTagName("input");
+	var filledFields = 0;
+	var submitButton = document.getElementById("pit_submit");
+	var commentText = document.getElementsByTagName("textarea")[0];
 
+	commentsInput.oninput = function() {
+		if (commentsInput.value != "") {
+			nameField.setAttribute("required", "required");
+		} else {
+			nameField.removeAttribute("required");
+		}
+	};
+	
+	nameField.oninput = function() {
+		if (nameField.value != "") {
+			commentsInput.setAttribute("required", "required");
+		} else {
+			commentsInput.removeAttribute("required");
+		}
+	};
+	
+	fileInput.onchange = function(e) {
+		reader.readAsDataURL(e.target.files[0]);
+	};
+
+	var forms = document.getElementsByTagName('form');
+	for (var i = 0; i < forms.length; i++) {
+	    forms[i].noValidate = true;
+	    forms[i].addEventListener('submit', function(event) {
+	        if (!event.target.checkValidity()) {
+	            event.preventDefault();
+	            alert("Looks like some fields have some invalid data. Why would that be?");
+	        }
+	    }, false);
+	}
+
+	submitButton.onclick = function(event) {
+		if (inputs[1].value != "" && inputs[2].value == "" && inputs[3].value == "" && commentText.value == "") {
+			event.preventDefault();
+			alert('What are you doing? Trying to only submit a team number. What good does that do?');
+		}
+	}
 	
 	</script>
 <?php 

@@ -151,6 +151,18 @@ include('header.php');
 			</svg>
 		</div>
 	</div>
+	<script>
+	var forms = document.getElementsByTagName('form');
+	for (var i = 0; i < forms.length; i++) {
+	    forms[i].noValidate = true;
+	    forms[i].addEventListener('submit', function(event) {
+	        if (!event.target.checkValidity()) {
+	            event.preventDefault();
+	            alert("Looks like some fields have some invalid data. Why would that be?");
+	        }
+	    }, false);
+	}
+	</script>
 <?php 
 	include("footer.php");
 ?>

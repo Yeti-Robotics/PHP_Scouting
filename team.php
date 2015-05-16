@@ -33,6 +33,7 @@ if($stmt = $db->prepare($query)){
 }
 ?>
 		<h2 class="page_header">Team <?php echo $team;?></h2>
+		<h3 class="pit_link"><a href="viewRobot.php?teamNumber=<?php echo $_GET['team'];?>">Pit Info</a></h3><br/><br/><br/>
 <?php
 $result = getTeamRankings($db, $team);
 echo "<h3>Overall Results</h3>";

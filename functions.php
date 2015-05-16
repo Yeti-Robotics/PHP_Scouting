@@ -106,4 +106,44 @@ function getPic($team, $pic) {
 	return $file[0];
 }
 
+function getPitComments($db, $team) {
+	$query = "SELECT team_number AS 'Team', pit_comments AS 'Pit Scouters Comments', scouter_name AS 'Pit Scouter', UNIX_TIMESTAMP(timestamp) AS timestamp
+					FROM pit_scouting
+					WHERE team_number = ?";
+	//Time stamps?
+	if($stmt = $db->prepare($query)) {
+		$stmt->bind_param("i", $team);
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+	else {
+		return null;
+	}
+}
+
+function resizeImage($src, $dst) {
+
+	header ( 'Content-Type: image/jpeg' );
+
+	list ( $width, $height ) = getimagesize ( $src );
+
+	$newwidth = $width;
+	$newheight = $height;
+
+	if ($width > 640 || $height > 640) {
+		$ratio = 640 / max ( [
+				$width,
+				$height
+		] );
+		$newwidth = $width * $ratio;
+		$newheight = $height * $ratio;
+	}
+
+	$newImg = imagecreatetruecolor ( $newwidth, $newheight );
+	$source = imagecreatefromjpeg( $src );
+
+	imagecopyresized ( $newImg, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height );
+
+	imagejpeg ( $newImg, $dst );
+}
 ?>

@@ -1,84 +1,122 @@
 <?php 
 	include('header.php');
-?>
-<script>
-	var xmlHttp = new XMLHttpRequest();
-	var picNum = 1;	
+	include('functions.php');
+	include('connect.php');
 
+	$comments = [];
 	
-	$.urlParam = function(name){
-	    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
-	    return results[1] || 0;
+	$result = getPitComments($db, $_GET['teamNumber']);
+	if ($result) {
+		while ($row = $result->fetch_assoc()) {
+			if ($row["Pit Scouters Comments"] != "" && $row["Pit Scouters Comments"] != null) {
+				$comments[] = $row["Pit Scouters Comments"];
+				$timestamps[] = intval($row["timestamp"]);
+				$names[] = $row["Pit Scouter"];
+			}
+		}
 	}
 	
-	$(document).ready(function(){
-		$.get("get_picture.php?teamNumber=" + $.urlParam("teamNumber") + "&pic=1", function(data, status) {
-			$("#picture").attr("src", data);
-		});
+	$db->close();
+?>
+<center>
+	<span id='pic_num'>
+	</span>
+</center>
+<span id='left_arrow' onclick='previousPicture()'>
+	← Previous Picture
+</span>
+<span id='right_arrow'onclick='nextPicture()'>
+	Next Picture →
+</span>
+<div id='img_div'>
+	<img id='picture' src='' alt="What? Where's the picture?!?">
+</div>
+<hr/>
+<div>
+	<h3>Comments:</h3>
+	<?php 
+		if (count($comments) == 0) {
+			echo "<p class='team_comment'>No comments are available for this team.</p>";
+		} else {
+			foreach ($comments as $key => $comment) {
+				echo "<p class='team_comment'>";
+				echo $comment;
+				echo "<br/>";
+				echo "<span class='timestamp'>-- ".$names[$key].", ".timeAgo($timestamps[$key])."</span>";
+				echo "</p>";
+			}
+		}
+	?>
+</div>
+<script>
+	var picNum = 1;	
+	var teamNumber = <?php echo json_encode($_GET['teamNumber']);?>;
+	var pics = <?php
+					$dir = scandir("pics/".$_GET['teamNumber']);
+					array_splice($dir, 0, 2);
+					echo json_encode($dir);				
+				?>;
+	for (var i = 0; i < pics.length; i++) {
+		pics[i] = "pics/" + teamNumber + "/" + pics[i];
+	}
+	var picLimit = pics.length;
+	var picture;
+	var angle = 0;
+	var ogOrientation = true;
+	var leftPadding = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('padding-left'));
+	var rightPadding = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('padding-right'));
+	var paddingWidth = leftPadding + rightPadding;
+	var width = document.width - paddingWidth;
+
+	picture = document.getElementById("picture");
+	if (picLimit > 1) {
+		picture.setAttribute("src", pics[0]);
 		refreshPicNum();
-	});
+		setPictureWidth();
+	}
+	else if(picLimit == 1) {
+		picture.setAttribute("src", pics[0]);
+		refreshPicNum();
+		setPictureWidth();
+		
+		document.getElementById("left_arrow").innerHTML = "";
+		document.getElementById("right_arrow").innerHTML = "";
+		document.getElementById("img_div").innerHTML += "<br><center><h3>No more pictures are available for this team</h3></center>";
+	}
+	else {
+		document.getElementById("left_arrow").innerHTML = "";
+		document.getElementById("right_arrow").innerHTML = "";
+		document.getElementById("img_div").innerHTML = "<center><h3>No pictures are available for this team</h3></center>";
+	}
 	
 	function previousPicture() {
 		if (picNum > 1) {
 			picNum--;
+		} else {
+			picNum = picLimit;
 		}
-		$(document).ready(function(){
-			$.get("get_picture.php?teamNumber=" + $.urlParam("teamNumber") + "&pic=" + picNum, function(data, status) {
-				$("#picture").attr("src", data);
-			});
-		});
+		picture.setAttribute("src", pics[picNum - 1]);
 		refreshPicNum();
 	}
 
 	function nextPicture() {
-// 		$(document).ready(function() {
-// 			$.get("get_picture.php?teamNumber=" + $.urlParam("teamNumber") + "&pic=" + (picNum + 1), function(data, status) {
-// 				console.log("\"" + dataString + "\"" + "\n \"" + data.slice(0, 11) + "\"");
-// 				if (data != "<br /><b>Warning</b>:  file(pics/1024/" + (picNum + 1) + ".txt): failed to open stream: No such file or directory in <b>C:\xampp\htdocs\scouting\functions.php</b> on line <b>105</b><br />") {
-// 					console.log("Looks good");
-// 					picNum++;
-// 				}
-// 			});
-// 		});
-		$(document).ready(function() {
-
-			$.get("get_picture.php?teamNumber=" + $.urlParam("teamNumber") + "&pic=" + (picNum + 1), function(data, status) {
-				if (data[0] !== "<") {
-					picNum++;
-				}
-			});
-			
-			$.get("get_picture.php?teamNumber=" + $.urlParam("teamNumber") + "&pic=" + picNum, function(data, status) {
-				$("#picture").attr("src", data);
-			});
-		});
-		refreshPicNum();	
+		if (picNum < picLimit) {
+			picNum++;
+		} else {
+			picNum = 1;
+		}
+		picture.setAttribute("src", pics[picNum - 1]);
+		refreshPicNum();
 	};
 	
 	function refreshPicNum() {
-		document.getElementById("pic_num").innerHTML = "Picure #" + picNum;
+		document.getElementById("pic_num").innerHTML = picNum + "/" + picLimit;
+	}
+
+	function setPictureWidth() {
+		picture.setAttribute("width", width);
+		picture.removeAttribute("height");
 	}
 </script>
-<center>
-	<span id='left_arrow' class="link" onclick="previousPicture()">
-		  ←
-	</span>
-	</br></br>
-	<span id='right_arrow' class="link" onclick="nextPicture()">
-		  →
-	</span>
-</center>
-<img id='picture' src='' alt='What? No picture?!?'>
-<p id='pic_num'></p>
-<?php
-	
-
-// 	if(file_exists(makeDir(1)))  {
-// 		for($i = 1; file_exists(makeDir($i)); $i++) {
-// 			echo makeImageHTML(getPic($i));
-// 			echo "<br>";
-// 		}
-// 	}
-	
-	include('footer.php');
-?>
+</body>
+</html>
