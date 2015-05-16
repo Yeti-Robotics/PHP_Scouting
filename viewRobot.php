@@ -5,6 +5,9 @@
 
 	$comments = [];
 	$picCredit = [];
+	$picNum = [];
+	$picTimestamps = [];
+	$picNames = [];
 	
 	$result = getPitComments($db, $_GET['teamNumber']);
 	if ($result) {
@@ -20,16 +23,14 @@
 	$result = getPicInfo($db, $_GET['teamNumber']);
 	if ($result) {
 		while ($row = $result->fetch_assoc()) {
-			if ($row["Pit Scouter"] != "" && $row["Pit Scouter"] != null) {
-				$picPath[] = $row["Picture Path"];
-				$picTimestamps[] = intval($row["timestamp"]);
-				$picNames[] = $row["Pit Scouter"];
-			}
+			$picNum[] = $row["Picture Number"];
+			$picTimestamps[] = intval($row["timestamp"]);
+			$picNames[] = $row["Pit Scouter"];
 		}
 	}
 	
-	for ($i = 0; $i < count($picPath); $i++) {
-		$picCredit[$i] = "Submitted by $picNames[$i] $picTimestamps[$i] ago";
+	for ($i = 0; $i < count($picNum); $i++) {
+		$picCredit[$i] = "Submitted by $picNames[$i] " . timeAgo($picTimestamps[$i]);
 	}
 	
 	$db->close();
@@ -46,6 +47,8 @@
 </span>
 <div id='img_div'>
 	<img id='picture' src='' alt="What? Where's the picture?!?">
+	<p id="pic_credit">
+	</p>
 </div>
 <hr/>
 <div>
@@ -86,15 +89,18 @@
 	var rightPadding = parseFloat(window.getComputedStyle(document.body, null).getPropertyValue('padding-right'));
 	var paddingWidth = leftPadding + rightPadding;
 	var width = document.width - paddingWidth;
+	var picCreditText = document.getElementById("pic_credit");
 
 	picture = document.getElementById("picture");
 	if (picLimit > 1) {
 		picture.setAttribute("src", pics[0]);
+		picCreditText.innerHTML = picCredit[0];
 		refreshPicNum();
 		setPictureWidth();
 	}
 	else if(picLimit == 1) {
 		picture.setAttribute("src", pics[0]);
+		picCreditText.innerHTML = picCredit[0];
 		refreshPicNum();
 		setPictureWidth();
 		
@@ -115,6 +121,7 @@
 			picNum = picLimit;
 		}
 		picture.setAttribute("src", pics[picNum - 1]);
+		picCreditText.innerHTML = picCredit[picNum - 1];
 		refreshPicNum();
 	}
 
@@ -125,6 +132,7 @@
 			picNum = 1;
 		}
 		picture.setAttribute("src", pics[picNum - 1]);
+		picCreditText.innerHTML = picCredit[picNum - 1];
 		refreshPicNum();
 	};
 	
