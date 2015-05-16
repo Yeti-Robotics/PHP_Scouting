@@ -4,6 +4,7 @@
 	include('connect.php');
 
 	$comments = [];
+	$picCredit = [];
 	
 	$result = getPitComments($db, $_GET['teamNumber']);
 	if ($result) {
@@ -16,6 +17,21 @@
 		}
 	}
 	
+	$result = getPicInfo($db, $_GET['teamNumber']);
+	if ($result) {
+		while ($row = $result->fetch_assoc()) {
+			if ($row["Pit Scouter"] != "" && $row["Pit Scouter"] != null) {
+				$picPath[] = $row["Picture Path"];
+				$picTimestamps[] = intval($row["timestamp"]);
+				$picNames[] = $row["Pit Scouter"];
+			}
+		}
+	}
+	
+	for ($i = 0; $i < count($picPath); $i++) {
+		$picCredit[$i] = "Submitted by $picNames[$i] $picTimestamps[$i] ago";
+	}
+	
 	$db->close();
 ?>
 <center>
@@ -23,10 +39,10 @@
 	</span>
 </center>
 <span id='left_arrow' onclick='previousPicture()'>
-	← Previous Picture
+	&larr; Previous Picture
 </span>
 <span id='right_arrow'onclick='nextPicture()'>
-	Next Picture →
+	Next Picture &rarr;
 </span>
 <div id='img_div'>
 	<img id='picture' src='' alt="What? Where's the picture?!?">
@@ -51,6 +67,9 @@
 <script>
 	var picNum = 1;	
 	var teamNumber = <?php echo json_encode($_GET['teamNumber']);?>;
+	var picCredit = <?php 
+						echo json_encode($picCredit);
+					?>;
 	var pics = <?php
 					$dir = scandir("pics/".$_GET['teamNumber']);
 					array_splice($dir, 0, 2);

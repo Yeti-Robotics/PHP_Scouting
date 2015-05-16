@@ -107,9 +107,24 @@ function getPic($team, $pic) {
 }
 
 function getPitComments($db, $team) {
-	$query = "SELECT team_number AS 'Team', pit_comments AS 'Pit Scouters Comments', scouter_name AS 'Pit Scouter', UNIX_TIMESTAMP(timestamp) AS timestamp
-					FROM pit_scouting
-					WHERE team_number = ?";
+	$query = "SELECT team_number AS 'Team', pit_comments AS 'Pit Scouters Comments', scouter_name AS 'Pit Scouter', pic_path AS 'Picture Path', UNIX_TIMESTAMP(timestamp) AS timestamp
+				FROM pit_scouting
+				WHERE team_number = ?";
+	//Time stamps?
+	if($stmt = $db->prepare($query)) {
+		$stmt->bind_param("i", $team);
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+	else {
+		return null;
+	}
+}
+
+function getPicInfo($db, $team) {
+	$query = "SELECT team_number AS 'Team', scouter_name AS 'Pit Scouter', pic_path AS 'Picture Path', UNIX_TIMESTAMP(timestamp) AS timestamp
+				FROM pit_scouting
+				WHERE team_number = ?";
 	//Time stamps?
 	if($stmt = $db->prepare($query)) {
 		$stmt->bind_param("i", $team);

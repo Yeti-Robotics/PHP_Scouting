@@ -4,6 +4,7 @@
 	
 	//Picture submition
 	$teamNumber = $_POST['teamnumber'];
+	$picPath = "";
 
 	if(!empty($_FILES["RobotPicture"])) {
 		if(!file_exists("pics/")) {
@@ -16,17 +17,19 @@
 		array_splice($dir, 0, 2);
 		$dirLength = count($dir);
 		move_uploaded_file($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']));
+		$picPath = "pics/$teamNumber/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']);
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . "/pit.php");
 	}
 	
 	//Comments submition
-	if(!empty($_POST["comments"])) {
-		$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name)
-					VALUES (?, ?, ?)";
+// 	if(!empty($_POST["comments"])) {
+		$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name, pic_path)
+					VALUES (?, ?, ?, ?)";
 		if($stmt = $db->prepare($query)){
-			$stmt->bind_param("iss", $_POST["teamnumber"], 
+			$stmt->bind_param("isss", $_POST["teamnumber"], 
 						$_POST["comments"], 
-						$_POST["scouter_name"]);
+						$_POST["scouter_name"],
+						$picPath);
 				$stmt->execute();
 				$insert_id = $stmt->insert_id;
 			if ($insert_id > 0) {
@@ -36,7 +39,7 @@
 			}
 		}
 		$db->close();
-	}
+// 	}
 	
 	function getFileExtension($fileName) {
 		$pathInfo = pathinfo($fileName);

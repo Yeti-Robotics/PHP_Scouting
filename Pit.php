@@ -3,6 +3,7 @@
 ?>
 	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
 	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
+	<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name' required>
 	<fieldset>
 		<img alt="Please Upload a File!" id='displayarea' style="width: 140px" height='20px'>
 		<br>
@@ -13,8 +14,6 @@
 	</fieldset>
 	<fieldset>
 		<legend>Type Your comments here</legend>
-		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name'><br/>
-		<br>
 		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
 		<br>
 	</fieldset>
@@ -49,13 +48,13 @@
 		}
 	};
 	
-	nameField.oninput = function() {
-		if (nameField.value != "") {
-			commentsInput.setAttribute("required", "required");
-		} else {
-			commentsInput.removeAttribute("required");
-		}
-	};
+// 	nameField.oninput = function() {
+// 		if (nameField.value != "") {
+// 			commentsInput.setAttribute("required", "required");
+// 		} else {
+// 			commentsInput.removeAttribute("required");
+// 		}
+// 	};
 	
 	fileInput.onchange = function(e) {
 		reader.readAsDataURL(e.target.files[0]);
