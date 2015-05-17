@@ -5,6 +5,7 @@
 	
 	//Picture submition
 	$teamNumber = $_POST['teamnumber'];
+	$picNum = 0;
 
 	if(!empty($_FILES["RobotPicture"])) {
 		if(!file_exists("pics/")) {
@@ -21,7 +22,7 @@
 	}
 	
 	//Comments submition
-	if(!empty($_POST["comments"])) {
+	if(!empty($_POST["comments"]) && $_FILES["RobotPicture"]["size"] == 0) {
 		$query = "INSERT INTO pit_scouting (team_number, pit_comments, scouter_name)
 					VALUES (?, ?, ?)";
 		if($stmt = $db->prepare($query)){
@@ -36,13 +37,43 @@
 				echo "<h1>Upload failed. Please review your data and try again.</h1>";
 			}
 		}
-		$db->close();
+	}
+		
+	if ($_FILES["RobotPicture"]["size"] > 0 && empty($_POST["comments"])) {
+		$query = "INSERT INTO pit_scouting (team_number, scouter_name, pic_num)
+					VALUES (?, ?, ?)";
+		if($stmt = $db->prepare($query)){
+			$stmt->bind_param("isi", $_POST["teamnumber"], 
+						$_POST["scouter_name"],
+						$picNum);
+				$stmt->execute();
+				$insert_id = $stmt->insert_id;
+			if ($insert_id > 0) {
+				header("Location: http://" . $_SERVER['HTTP_HOST'] . "/pit.php");
+			} else {
+				echo "<h1>Upload failed. Please review your data and try again.</h1>";
+			}
+		}
 	}
 	
-	function getFileExtension($fileName) {
-		$pathInfo = pathinfo($fileName);
-		return $pathInfo['extension'];
+	if ($_FILES["RobotPicture"]["size"] > 0 && !empty($_POST["comments"])) {
+		$query = "INSERT INTO pit_scouting (team_number, scouter_name, pic_num, pit_comments)
+					VALUES (?, ?, ?, ?)";
+		if($stmt = $db->prepare($query)){
+			$stmt->bind_param("isis", $_POST["teamnumber"], 
+						$_POST["scouter_name"],
+						$picNum,
+						$_POST["comments"]);
+				$stmt->execute();
+				$insert_id = $stmt->insert_id;
+			if ($insert_id > 0) {
+				header("Location: http://" . $_SERVER['HTTP_HOST'] . "/pit.php");
+			} else {
+				echo "<h1>Upload failed. Please review your data and try again.</h1>";
+			}
+		}
 	}
+	$db->close();
 	
 	echo "<h2 class='link' onclick='history.back()'>Back</h2>";
 	include('footer.php');	
