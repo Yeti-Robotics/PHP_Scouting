@@ -2,8 +2,11 @@
 	include ('header.php');
 ?>
 	<form name='pit' action="full_pit_submit.php" method="POST" enctype="multipart/form-data">
-	<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
-	<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name' required>
+	<fieldset>
+		<legend>Please fill this out first</legend>
+		<input type='number' name='teamnumber' id='teamnumber' placeholder='Enter Team Number here' required>
+		<input id="scouter_name" type="text" name='scouter_name' placeholder='Please enter your name' required>
+	</fieldset>
 	<fieldset>
 		<img alt="Please Upload a File!" id='displayarea'>
 		<br>
@@ -14,7 +17,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Type Your comments here</legend>
-		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
+		<textarea id="comments" rows="3" cols="34" name='comments' placeholder='Enter comments about the team here'></textarea>
 		<br>
 	</fieldset>
 	<div class="submit_button_container">
