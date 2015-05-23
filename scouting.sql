@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2015 at 09:02 PM
+-- Generation Time: May 23, 2015 at 02:33 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -32,8 +32,9 @@ CREATE TABLE IF NOT EXISTS `pit_scouting` (
   `team_number` int(11) NOT NULL,
   `pit_comments` mediumtext NOT NULL,
   `scouter_name` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pic_num` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `scout_data` (
   `totes_from_human` tinyint(1) NOT NULL,
   `cans_auto_origin` tinyint(4) NOT NULL,
   `in_auto_zone` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -107,12 +108,12 @@ ALTER TABLE `stacks`
 -- AUTO_INCREMENT for table `pit_scouting`
 --
 ALTER TABLE `pit_scouting`
-MODIFY `pit_scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `pit_scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `scout_data`
 --
 ALTER TABLE `scout_data`
-MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+MODIFY `scout_data_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=299;
 --
 -- Constraints for dumped tables
 --

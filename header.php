@@ -3,9 +3,9 @@
 <title>Yeti Robotics Scouting</title>
 <?php
 	if ($_SERVER['PHP_SELF'] == "/index.php" || $_SERVER['PHP_SELF'] == "/pit.php") {
-		echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />';
+		echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">';
 	} else {
-		echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />';
+		echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">';
 	}
 ?>
 <meta name="apple-mobile-web-app-capable" content="yes">

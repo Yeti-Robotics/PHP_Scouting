@@ -1,5 +1,4 @@
 <?php 
-	include('header.php');
 	include('connect.php');
 	include('functions.php');
 	
@@ -17,7 +16,7 @@
 		$dir = scandir("pics/".$teamNumber);
 		array_splice($dir, 0, 2);
 		$dirLength = count($dir);
-		resizeImage($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . "." . getFileExtension($_FILES['RobotPicture']['name']));
+		resizeImage($_FILES['RobotPicture']['tmp_name'], "pics/" . $teamNumber . "/" . ($dirLength + 1) . ".jpg");
 		header("Location: http://" . $_SERVER['HTTP_HOST'] . "/pit.php");
 	}
 	
@@ -76,5 +75,4 @@
 	$db->close();
 	
 	echo "<h2 class='link' onclick='history.back()'>Back</h2>";
-	include('footer.php');	
 ?>
