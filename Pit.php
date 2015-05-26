@@ -14,7 +14,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Type Your comments here</legend>
-		<textarea id="comments" rows="3" cols="64" name='comments' placeholder='Enter comments about the team here'></textarea>
+		<textarea id="comments" rows="3" cols="44" name='comments' placeholder='Enter comments about the team here'></textarea>
 		<br>
 	</fieldset>
 	<div class="submit_button_container">
