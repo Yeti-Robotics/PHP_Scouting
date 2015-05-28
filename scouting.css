@@ -149,7 +149,9 @@ img {
 	margin-top: 0px;
 }
 
-
+textarea {
+	width:100%;
+}
 
 
 
