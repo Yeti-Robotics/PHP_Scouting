@@ -65,7 +65,12 @@
 
 	submitButton.onclick = function(event) {
 		if (inputs[1].value != "" && inputs[2].value == "" && inputs[3].value == "" && commentText.value == "") {
-			event.preventDefault();
+			if(event.preventDefault) {
+				event.preventDefault();
+			}
+			else {
+				event.returnValue = false;
+			}
 			alert('What are you doing? Trying to only submit a team number. What good does that do?');
 		}
 	}
