@@ -6,7 +6,7 @@
 	$teamNumber = $_POST['teamnumber'];
 	$picNum = 0;
 
-	if(!empty($_FILES["RobotPicture"])) {
+	if($_FILES["RobotPicture"]["size"] > 0) {
 		if(!file_exists("pics/")) {
 			mkdir("pics/");
 		}
