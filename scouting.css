@@ -38,6 +38,11 @@ body {
 	color: white;
 }
 
+input[type=submit] {
+	-webkit-appearance: none;
+	-webkit-border-radius:0;
+}
+
 .submit_class_container {
 	margin-top: 10px;
 }
