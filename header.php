@@ -18,12 +18,15 @@
 		<a href="/">Yeti Scouting</a> | 
 		<a href="/results.php">Results</a> | 
 		<a href="/pit.php">Pit Form</a>
-		<form class="search" action="team.php" method="get">
-			<input type="number" name="team" placeholder="Enter team number">
-			<button type="submit">Go</button>
-		</form>
-		<form class="search" action="viewRobot.php" method="get">
-			<input type="number" name="teamNumber" placeholder="View a team's pit info">
+		<a href="/matches.php">Match list</a>
+		<br/>
+		<form id="search-form" class="search" action="team.php" method="get">
+		<select id="search-selector">
+		<option value="team" selected="selected">Teams</option>
+		<option value="pit">Pits</option>
+		<option value="match">Matches</option>
+		</select>
+			<input id="search-box" type="number" name="team" placeholder="Enter a team number">
 			<button type="submit">Go</button>
 		</form>
 		</nav>
