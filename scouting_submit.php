@@ -81,6 +81,7 @@ if($stmt = $db->prepare($query)){
 	if ($insert_id > 0) {
 		header("Location: http://" . $_SERVER['HTTP_HOST']);
 	} else {
+		header("HTTP/1.1 418");
 		echo "<h1>Upload failed.</h1>";
 	}
 }
